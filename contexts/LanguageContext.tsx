@@ -19,74 +19,76 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const router = useRouter();
-  // Important: Initialize with a default value and only update after client-side code runs
   const [language, setLanguageState] = useState<string>("en");
-  // Track if we're on client side
   const [isClient, setIsClient] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
-  // This effect runs once to set isClient true
+  // クライアントサイドで実行されていることを確認するフラグを設定
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // URL から言語を取得して設定 - only runs on client
+  // URLとローカルストレージから言語設定を読み込む
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient || !router.isReady) return;
 
     const urlLang = router.query.lang as string;
+
     if (urlLang && (urlLang === "en" || urlLang === "ja")) {
       setLanguageState(urlLang);
       try {
-        localStorage.setItem("preferredLanguage", urlLang);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("preferredLanguage", urlLang);
+        }
       } catch (e) {
         console.warn("Could not access localStorage", e);
       }
     } else {
-      // localStorage から言語設定を読み込む
+      // ローカルストレージから言語設定を読み込む
       try {
-        const savedLang = localStorage.getItem("preferredLanguage");
-        if (savedLang && (savedLang === "en" || savedLang === "ja")) {
-          setLanguageState(savedLang);
-          // URL に言語パラメータがない場合は追加
-          if (!urlLang && router.isReady) {
-            router.replace(
-              {
-                pathname: router.pathname,
-                query: { ...router.query, lang: savedLang },
-              },
-              undefined,
-              { shallow: true }
-            );
+        if (typeof window !== "undefined") {
+          const savedLang = localStorage.getItem("preferredLanguage");
+          if (savedLang && (savedLang === "en" || savedLang === "ja")) {
+            setLanguageState(savedLang);
+
+            // URLにlangパラメータがなければ追加
+            if (!urlLang) {
+              router.replace(
+                {
+                  pathname: router.pathname,
+                  query: { ...router.query, lang: savedLang },
+                },
+                undefined,
+                { shallow: true }
+              );
+            }
           }
         }
       } catch (e) {
         console.warn("Could not access localStorage", e);
       }
     }
-  }, [router.query.lang, router.pathname, router.isReady, isClient]);
+
+    setIsInitialized(true);
+  }, [router.isReady, router.query.lang, isClient]);
 
   // 言語を変更する関数
   const setLanguage = (lang: string) => {
-    // 現在の言語と異なる場合のみ処理
     if (lang !== language) {
       setLanguageState(lang);
 
       try {
         if (typeof window !== "undefined") {
           localStorage.setItem("preferredLanguage", lang);
+
+          // URL を構築し、ページを再読み込み
+          const newUrl = new URL(window.location.href);
+          newUrl.searchParams.set("lang", lang);
+          window.location.href = newUrl.toString();
         }
       } catch (e) {
-        console.warn("Could not access localStorage", e);
-      }
-
-      // URL を構築し、ハードリロードのためにwindow.locationを使用
-      try {
-        const newUrl = new URL(window.location.href);
-        newUrl.searchParams.set("lang", lang);
-        window.location.href = newUrl.toString();
-      } catch (e) {
-        console.error("Error updating URL", e);
-        // Fallback method if URL manipulation fails
+        console.error("Error updating language", e);
+        // フォールバック: Next.jsルーターを使用
         if (router.isReady) {
           router.push({
             pathname: router.pathname,
@@ -97,6 +99,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  // 子コンポーネントの条件付きレンダリング
+  // isInitializedフラグがtrueになるまで子コンポーネントをレンダリングしない
+  // これにより、サーバーサイドレンダリングとクライアントサイドレンダリングの不一致を防ぐ
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
       {children}

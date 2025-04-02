@@ -1,5 +1,6 @@
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useState, useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
 
 type Language = {
   code: string;
@@ -11,7 +12,8 @@ const languages: Language[] = [
   { code: "ja", name: "日本語" },
 ];
 
-const LanguageSwitcher = () => {
+// 実際のコンポーネント実装
+const LanguageSwitcherComponent = () => {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -88,5 +90,13 @@ const LanguageSwitcher = () => {
     </div>
   );
 };
+
+// クライアントサイドでのみレンダリングするためにdynamic importを使用
+const LanguageSwitcher = dynamic(
+  () => Promise.resolve(LanguageSwitcherComponent),
+  {
+    ssr: false, // サーバーサイドレンダリングを無効化
+  }
+);
 
 export default LanguageSwitcher;
