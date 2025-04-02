@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Post } from "../../types";
+import NoSSR from "../utils/NoSSR";
 
 interface ArticleCardProps {
   memo: Post;
@@ -9,6 +10,25 @@ interface ArticleCardProps {
 const ArticleCard = ({ memo }: ArticleCardProps) => {
   const router = useRouter();
   const currentLang = (router.query.lang as string) || "en";
+
+  // Simple placeholder for server rendering, avoids hydration mismatches
+  const SimpleDateDisplay = () => (
+    <span className="text-sm text-gray-500">{memo.date}</span>
+  );
+
+  // Client-only rich date formatting
+  const FormattedDate = () => (
+    <time dateTime={memo.date} className="text-sm text-gray-500">
+      {new Date(memo.date).toLocaleDateString(
+        memo.language === "ja" ? "ja-JP" : "en-US",
+        {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }
+      )}
+    </time>
+  );
 
   return (
     <article className="border-b pb-6 transition-all duration-200 hover:bg-gray-50 p-4 -mx-4 rounded">
@@ -24,19 +44,14 @@ const ArticleCard = ({ memo }: ArticleCardProps) => {
         </Link>
       </h2>
 
-      <div className="text-sm text-gray-500 mb-3 flex items-center gap-2">
-        <time dateTime={memo.date}>
-          {new Date(memo.date).toLocaleDateString(
-            memo.language === "ja" ? "ja-JP" : "en-US",
-            {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            }
-          )}
-        </time>
+      <div className="mb-3 flex items-center gap-2">
+        {/* Use NoSSR for date formatting to prevent hydration issues */}
+        <NoSSR fallback={<SimpleDateDisplay />}>
+          <FormattedDate />
+        </NoSSR>
+
         <span className="text-xs px-2 py-0.5 bg-gray-100 rounded-full">
-          {memo.language === "ja" ? "🇯🇵" : "🇺🇸"}
+          {memo.language === "ja" ? "JP" : "EN"}
         </span>
       </div>
 
