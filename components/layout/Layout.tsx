@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/next";
 import Header from "./Header";
 import NoSSR from "../utils/NoSSR";
 import { useLanguage } from "../../contexts/LanguageContext";
@@ -36,6 +37,9 @@ const Layout = ({ children, title }: LayoutProps) => {
             © {new Date().getFullYear()} Takeshi Hashimoto
           </p>
         </footer>
+      </NoSSR>
+      <NoSSR>
+        <Analytics />
       </NoSSR>
     </>
   );
