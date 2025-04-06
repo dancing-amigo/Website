@@ -76,49 +76,70 @@ export function searchMemosByKeyword(
   keyword: string,
   language?: string
 ): SearchResult[] {
-  const allMemos = language ? getAllMemos(language) : getAllMemos();
-  const lowercasedKeyword = keyword.toLowerCase();
+  if (!keyword || keyword.trim() === "") {
+    return [];
+  }
 
+  const allMemos = language ? getAllMemos(language) : getAllMemos();
+  const lowercasedKeyword = keyword.toLowerCase().trim();
+
+  // キーワードに完全に一致する記事のみをフィルタリング
   return allMemos
     .filter((memo) => {
+      // より厳密な検索条件
       const inTitle = memo.title.toLowerCase().includes(lowercasedKeyword);
       const inContent = memo.content.toLowerCase().includes(lowercasedKeyword);
+      const inExcerpt = memo.excerpt.toLowerCase().includes(lowercasedKeyword);
       const inTags = memo.tags.some((tag) =>
         tag.toLowerCase().includes(lowercasedKeyword)
       );
 
-      return inTitle || inContent || inTags;
+      // いずれかに完全一致する場合のみtrue
+      return inTitle || inContent || inExcerpt || inTags;
     })
     .map((memo) => {
       // 検索結果に一致した場所の情報を追加
       const matchLocations = [];
+
       if (memo.title.toLowerCase().includes(lowercasedKeyword)) {
         matchLocations.push("title");
       }
+
       if (memo.content.toLowerCase().includes(lowercasedKeyword)) {
         matchLocations.push("content");
       }
+
+      if (memo.excerpt.toLowerCase().includes(lowercasedKeyword)) {
+        matchLocations.push("excerpt");
+      }
+
       if (
         memo.tags.some((tag) => tag.toLowerCase().includes(lowercasedKeyword))
       ) {
         matchLocations.push("tags");
       }
 
-      // コンテンツ内でキーワードが見つかった場合、スニペットを生成
+      // コンテンツ内でキーワードが見つかった場合、より良いスニペットを生成
       let snippet = "";
       if (matchLocations.includes("content")) {
         const contentLower = memo.content.toLowerCase();
         const keywordIndex = contentLower.indexOf(lowercasedKeyword);
-        const snippetStart = Math.max(0, keywordIndex - 50);
+
+        // キーワードの前後により多くのコンテキストを表示
+        const snippetStart = Math.max(0, keywordIndex - 100);
         const snippetEnd = Math.min(
           memo.content.length,
-          keywordIndex + lowercasedKeyword.length + 50
+          keywordIndex + lowercasedKeyword.length + 100
         );
+
         snippet = memo.content.substring(snippetStart, snippetEnd).trim();
 
-        // スニペットが文の途中から始まる場合は...を追加
+        // スニペットが文の途中から始まる/終わる場合は...を追加
         if (snippetStart > 0) snippet = "..." + snippet;
         if (snippetEnd < memo.content.length) snippet = snippet + "...";
+      } else if (matchLocations.includes("excerpt")) {
+        // 内容が見つからない場合は抜粋を使用
+        snippet = memo.excerpt;
       }
 
       return {
@@ -126,6 +147,35 @@ export function searchMemosByKeyword(
         matchLocations,
         snippet,
       };
+    })
+    .sort((a, b) => {
+      // 優先順位付け: title > tags > content
+      if (
+        a.matchLocations.includes("title") &&
+        !b.matchLocations.includes("title")
+      ) {
+        return -1;
+      }
+      if (
+        !a.matchLocations.includes("title") &&
+        b.matchLocations.includes("title")
+      ) {
+        return 1;
+      }
+      if (
+        a.matchLocations.includes("tags") &&
+        !b.matchLocations.includes("tags")
+      ) {
+        return -1;
+      }
+      if (
+        !a.matchLocations.includes("tags") &&
+        b.matchLocations.includes("tags")
+      ) {
+        return 1;
+      }
+      // デフォルトは日付順
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
 }
 
