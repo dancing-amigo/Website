@@ -1,6 +1,6 @@
 ---
 title: "思考システムについて - 「知能とは知識である」の続き"
-date: "2025-4-9"
+date: "2025-04-09"
 tags: []
 excerpt: ""
 translationKey: "thinking-systems"

@@ -1,6 +1,6 @@
 ---
 title: "Leisurely Humans Return to Being Artists"
-date: "2025-4-9"
+date: "2025-04-09"
 tags: []
 excerpt: ""
 translationKey: "artists-again"

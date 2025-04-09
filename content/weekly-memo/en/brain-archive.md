@@ -1,6 +1,6 @@
 ---
 title: "Brain Archive"
-date: "2025-3-30"
+date: "2025-03-30"
 tags: []
 excerpt: ""
 translationKey: "brain-archive"
