@@ -1,6 +1,6 @@
 ---
 title: "暇な人間たちはアーティストに回帰する"
-date: "2025-4-9"
+date: "2025-04-09"
 tags: []
 excerpt: ""
 translationKey: "artists-again"
