@@ -6,7 +6,7 @@ excerpt: ""
 translationKey: "all-is-one"
 ---
 
-## What Are We Living For?
+## Species Totalitarianism: What Are We Living For?
 
 We tend to think we live for ourselves, but from a deeper perspective, we may be operating within a framework of "species totalitarianism." This concept suggests that individuals are unconsciously programmed to optimize the prosperity of their species as a whole, regardless of their conscious intentions.
 
