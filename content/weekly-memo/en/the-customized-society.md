@@ -2,7 +2,7 @@
 title: "The Customized Society"
 date: "2025-04-06"
 tags: []
-excerpt: ""
+excerpt: 'The dramatic increase in productivity brought about by AI is signaling the end of the traditional mass production society and the emergence of a new era defined by individual optimization—what we might call a "customized society."'
 translationKey: "the-customized-society"
 ---
 
