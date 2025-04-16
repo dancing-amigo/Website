@@ -2,7 +2,7 @@
 title: "Leisurely Humans Return to Being Artists"
 date: "2025-04-09"
 tags: []
-excerpt: ""
+excerpt: 'As AI takes over more of our productive tasks, what should humans do with the time that’s left? The answer may lie in returning to our original nature—to create, to express, and to dance. This piece explores how the rise of AI and the emergence of "waiting time" invite us to rediscover the essential value of art and human creativity.'
 translationKey: "artists-again"
 ---
 
