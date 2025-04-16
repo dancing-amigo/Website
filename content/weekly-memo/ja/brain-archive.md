@@ -2,7 +2,7 @@
 title: "脳内アーカイブ"
 date: "2025-03-30"
 tags: []
-excerpt: ""
+excerpt: "思考や発見、学びの記録・整理・共有を目的とした個人的な試みとして、週間メモを始めることにした。"
 translationKey: "brain-archive"
 ---
 
