@@ -2,7 +2,7 @@
 title: "Intelligence Is Knowledge"
 date: "2025-04-01"
 tags: []
-excerpt: ""
+excerpt: 'We tend to think of "intelligence" as a special kind of reasoning ability or innate talent, but in reality, it is nothing more than the amount and structure of knowledge we possess. It is the knowledge network operating beneath our conscious awareness that truly defines the essence of intelligence.'
 translationKey: "intelligence-is-knowledge"
 ---
 

@@ -2,7 +2,7 @@
 title: "知能とは知識のことである"
 date: "2025-04-01"
 tags: []
-excerpt: ""
+excerpt: "私たちは「知能」を特別な思考力や才能と捉えがちですが、実際にはそれは「知識の量と構造」に他なりません。意識の背後で働く知識ネットワークこそが、知能の本質を形づくっています。"
 translationKey: "intelligence-is-knowledge"
 ---
 
