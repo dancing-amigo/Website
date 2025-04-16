@@ -2,10 +2,9 @@
 title: "What is Communication?"
 date: "2025-04-10"
 tags: []
-excerpt: ""
+excerpt: 'Communication is the act of gradually sharing each other''s "inner universe." Yet this process is always accompanied by limitations, as it relies on language—an inherently imperfect tool for translation.'
 translationKey: "communication"
 ---
-
 
 ## The Essence of Communication: Sharing Universes
 

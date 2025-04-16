@@ -2,7 +2,7 @@
 title: "Brain Archive"
 date: "2025-03-30"
 tags: []
-excerpt: ""
+excerpt: "I started this weekly memo as a personal initiative to record, organize, and share my thoughts, discoveries, and learnings."
 translationKey: "brain-archive"
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "All Is One - Species Totalitarianism"
+title: "Species Totalitarianism"
 date: "2025-04-13"
 tags: []
-excerpt: ""
+excerpt: "We living beings may seem to live for ourselves, but in truth, we are unconsciously driven by the greater purpose of species-level survival. And even that pursuit unfolds as part of a larger cosmic flow, functioning effortlessly beyond the scope of individual awareness."
 translationKey: "all-is-one"
 ---
 
