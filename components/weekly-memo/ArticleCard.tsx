@@ -44,7 +44,7 @@ const ArticleCard = ({ memo }: ArticleCardProps) => {
         </Link>
       </h2>
 
-      <div className="mb-3 flex items-center gap-2">
+      <div className="mb-2 flex items-center gap-2">
         {/* Use NoSSR for date formatting to prevent hydration issues */}
         <NoSSR fallback={<SimpleDateDisplay />}>
           <FormattedDate />
@@ -55,7 +55,8 @@ const ArticleCard = ({ memo }: ArticleCardProps) => {
         </span>
       </div>
 
-      <p className="text-gray-700 mb-3">{memo.excerpt}</p>
+      {/* Reduced size and line height for excerpt */}
+      <p className="text-sm text-gray-600 mb-3 leading-snug">{memo.excerpt}</p>
 
       <div className="flex flex-wrap gap-2">
         {memo.tags.map((tag) => (
