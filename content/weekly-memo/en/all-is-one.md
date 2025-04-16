@@ -1,5 +1,5 @@
 ---
-title: "All Is One - Species Totalitarianism"
+title: "Species Totalitarianism"
 date: "2025-04-13"
 tags: []
 excerpt: ""
