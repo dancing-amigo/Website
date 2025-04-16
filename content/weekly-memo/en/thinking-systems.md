@@ -2,7 +2,7 @@
 title: "Thinking Systems: 'Intelligence is Knowledge' Continued"
 date: "2025-04-09"
 tags: []
-excerpt: ""
+excerpt: "Thinking is a simple cycle: posing questions (System 2) and drawing answers from our knowledge (System 1). In this piece, I revisit traditional models of thought and explore how our thinking works—and how we can strengthen it."
 translationKey: "thinking-systems"
 ---
 
@@ -25,6 +25,7 @@ The conventional understanding of Systems 1 and 2 needs a fundamental revision. 
 On the other hand, **System 2 is a monitoring system for the self and the surrounding world**. System 2's essential role is to accurately grasp the environment and formulate appropriate "questions." System 2 doesn't generate "answers" itself—it merely serves to form questions to feed into System 1.
 
 From this perspective, the entire thinking process functions as a clear cycle:
+
 1. System 2 monitors the environment and self, generating appropriate questions
 2. These questions are input into System 1
 3. System 1 automatically generates answers
