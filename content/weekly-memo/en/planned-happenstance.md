@@ -11,7 +11,8 @@ translationKey: "planned-happenstance"
 
 How meticulously do you plan your life? Your career path five years from now, your ideal lifestyle, the goals you must achieve... Many people in society preach that a clear plan is the road to success. But I hold a slightly different view. I believe that **intentionally incorporating "chance" into your plans—in other words, "Planned Happenstance"—is what actually maximizes life's potential, or its "expected value,"** so to speak.
 
-### What Changes Life: Plans or Chance?
+
+## What Changes Life: Plans or Chance?
 
 Think about it for a moment. What events have truly had a major impact on your life? Was it something you achieved exactly according to plan through sheer hard work? Of course, that's a wonderful accomplishment. However, isn't it often the case that life is dramatically changed by unexpected encounters, sudden inspirations, or chance discoveries—things that feel more like "miracles" or "fate"?
 
@@ -21,7 +22,8 @@ Admittedly, such chance occurrences themselves might not significantly enhance m
 
 Considering this, **the change brought about by diligently following a plan might actually be minuscule compared to the change brought by chance events that can shake up our lives.**
 
-### The Trap of Planning: What We Lose for Efficiency
+
+## The Trap of Planning: What We Lose for Efficiency
 
 Of course, having a plan isn't inherently bad. Setting goals and striving towards them gives us daily direction and propels us forward. The problem lies in **adhering too rigidly to the plan.**
 
@@ -29,7 +31,8 @@ When plans are meticulous and schedules are packed, we tend to focus solely on a
 
 However, I believe that **life's breakthroughs are often hidden within those very "detours" and "wastes."**
 
-### The "Planned Happenstance" Approach
+
+## The "Planned Happenstance" Approach
 
 Therefore, I want to propose the idea of "Planned Happenstance." This isn't about passively waiting for chance; it's an approach to maximize life's expected value by **intentionally incorporating "randomness" into life's plans.**
 
@@ -37,7 +40,8 @@ You might think, "Aren't random actions just a waste of time?" Indeed, trying ne
 
 But consider this: what if among 100 "wasted efforts," there's just one "jackpot" (a miracle) that fundamentally changes your life? From a long-term perspective, wouldn't you say that **due to the potential magnitude of the return, the expected value of "random actions" is extremely high?**
 
-### How to Practice Planned Happenstance?
+
+## How to Practice Planned Happenstance?
 
 So, how can you actually do this? Here are the three things I practice:
 
@@ -47,7 +51,8 @@ So, how can you actually do this? Here are the three things I practice:
 
 Having a base plan or goals is wonderful. Without them, you wouldn't have a direction to channel what you gain from chance. However, the key is not to be bound by that plan, but to always incorporate an element of "play" that embraces unknown factors.
 
-### The Courage Not to Filter
+
+## The Courage Not to Filter
 
 Here's something I particularly want to emphasize: **Do not filter happenstance.**
 
@@ -55,7 +60,8 @@ If you apply filters like "This doesn't seem related to my career" or "This look
 
 It's okay if it seems wasteful. It's okay if you fail. In fact, **it's precisely in those seemingly irrelevant and inefficient places that the diamonds in the rough that make life shine are often found.** That's my conviction.
 
-### Conclusion: Happenstance is Fun
+
+## Conclusion: Happenstance is Fun
 
 Life isn't only wonderful when it goes according to plan. Rather, I believe it becomes interesting and rich precisely because it's filled with unpredictable events and chance encounters. "Planned Happenstance" is a strategy not for fearing this unpredictability, but for actively embracing and enjoying it. It's the courage to carry a map (your plan) but occasionally step onto paths not marked on it.
 
