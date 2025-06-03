@@ -8,8 +8,6 @@ translationKey: "information-secrecy-and-disclosure"
 
 # Information Secrecy and Disclosure
 
-*—The Cosmos Within and the Choice to Expand It Together—*
-
 We’ve spoken before about how our brain constitutes a kind of personal universe—a cosmos—shaped by the information we gather throughout our lives. Each individual lives in a vast external universe, yet constructs an internal model of it: a subjective, smaller universe based on experience, learning, and thought. Information, therefore, becomes the matter with which our internal cosmos is expanded. From this perspective, more information equates to a broader universe, and thus, a higher potential for understanding and action.
 
 This leads us to a natural question: if expanding one’s cosmos is beneficial, what role does information sharing play in our interactions with others—be it individuals, organizations, or society as a whole? Should we share what we know, or keep it to ourselves?
