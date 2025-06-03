@@ -24,7 +24,7 @@ export default function Home({ latestMemos }: HomeProps) {
       : "A place where I share my thoughts, principles, and work with the world.";
 
   const latestMemosTitle =
-    language === "ja" ? "最新の週間メモ" : "Latest Weekly Memos";
+    language === "ja" ? "最新のメモ" : "Latest Memos";
   const viewAllLabel = language === "ja" ? "すべて見る" : "View all";
 
   return (
@@ -35,7 +35,7 @@ export default function Home({ latestMemos }: HomeProps) {
           <h2 className="text-2xl font-bold">{latestMemosTitle}</h2>
           <Link
             href={{
-              pathname: "/weekly-memo",
+              pathname: "/memo",
               query: { lang: language },
             }}
             className="text-blue-600 hover:underline"

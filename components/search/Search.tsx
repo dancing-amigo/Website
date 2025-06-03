@@ -9,7 +9,7 @@ interface SearchProps {
 
 const Search = ({
   initialQuery = "",
-  searchPath = "/weekly-memo/search",
+  searchPath = "/memo/search",
 }: SearchProps) => {
   const router = useRouter();
   const { language } = useLanguage();

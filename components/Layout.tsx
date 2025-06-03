@@ -13,7 +13,7 @@ const Layout = ({ children, title = "My Personal Website" }: LayoutProps) => {
         <title>{title}</title>
         <meta
           name="description"
-          content="Personal website with weekly memos, principles, and work"
+          content="Personal website with memos, principles, and work"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

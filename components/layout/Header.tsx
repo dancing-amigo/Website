@@ -9,8 +9,8 @@ const Header = () => {
 
   const navItems = [
     {
-      name: language === "ja" ? "週間メモ" : "Weekly Memo",
-      path: "/weekly-memo",
+      name: language === "ja" ? "メモ" : "Memo",
+      path: "/memo",
     },
     {
       name: language === "ja" ? "原則" : "Principles",

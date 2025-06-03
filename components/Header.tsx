@@ -5,7 +5,7 @@ const Header = () => {
   const router = useRouter();
 
   const navItems = [
-    { name: "Weekly Memo", path: "/weekly-memo" },
+    { name: "Memo", path: "/memo" },
     { name: "Bible", path: "/bible" },
     { name: "Work", path: "/work" },
   ];

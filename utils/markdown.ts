@@ -6,7 +6,7 @@ import { Post, SearchResult } from "../types";
 const contentDirectory = path.join(process.cwd(), "content");
 
 export function getMemoBySlug(slug: string, language: string = "en"): Post {
-  const memoDirectory = path.join(contentDirectory, "weekly-memo", language);
+  const memoDirectory = path.join(contentDirectory, "memo", language);
   const fullPath = path.join(memoDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
@@ -29,7 +29,7 @@ export function getAllMemos(language?: string): Post[] {
   let allMemos: Post[] = [];
 
   for (const lang of languages) {
-    const memoDirectory = path.join(contentDirectory, "weekly-memo", lang);
+    const memoDirectory = path.join(contentDirectory, "memo", lang);
 
     // ディレクトリが存在しない場合はスキップ
     if (!fs.existsSync(memoDirectory)) {

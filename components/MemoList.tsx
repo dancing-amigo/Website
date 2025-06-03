@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Post } from "../types";
-import ArticleCard from "./weekly-memo/ArticleCard";
+import ArticleCard from "./memo/ArticleCard";
 
 interface MemoListProps {
   memos: Post[];
