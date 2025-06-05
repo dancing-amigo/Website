@@ -6,20 +6,20 @@ import TagCloud from "../../components/TagCloud";
 import { getAllMemos, getAllTags } from "../../utils/markdown";
 import { Post } from "../../types";
 
-interface WeeklyMemoPageProps {
+interface MemoPageProps {
   memos: Post[];
   tags: { tag: string; count: number }[];
   language: string;
 }
 
-export default function WeeklyMemoPage({
+export default function MemoPage({
   memos,
   tags,
   language,
-}: WeeklyMemoPageProps) {
+}: MemoPageProps) {
   const router = useRouter();
 
-  const title = language === "ja" ? "週間メモ" : "Weekly Memo";
+  const title = language === "ja" ? "メモ" : "Memo";
 
   return (
     <div>

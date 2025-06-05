@@ -43,7 +43,7 @@ const SearchResultCard = ({
       <h2 className="text-2xl font-bold mb-2">
         <Link
           href={{
-            pathname: `/weekly-memo/${result.slug}`,
+            pathname: `/memo/${result.slug}`,
             query: { lang: result.language },
           }}
           className="hover:underline"
@@ -95,7 +95,7 @@ const SearchResultCard = ({
           <Link
             key={tag}
             href={{
-              pathname: `/weekly-memo/tag/${tag}`,
+              pathname: `/memo/tag/${tag}`,
               query: { lang: language },
             }}
             className={`text-xs ${

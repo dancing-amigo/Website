@@ -31,7 +31,7 @@ const TagCloud = ({ tags }: TagCloudProps) => {
           <Link
             key={tag}
             href={{
-              pathname: `/weekly-memo/tag/${tag}`,
+              pathname: `/memo/tag/${tag}`,
               query: { lang: currentLang },
             }}
             style={{ fontSize: getSize(count) }}

@@ -24,7 +24,7 @@ export default function MemoPage({ memo, translation }: MemoPageProps) {
       <div className="flex justify-between items-center mb-4">
         <Link
           href={{
-            pathname: "/weekly-memo",
+            pathname: "/memo",
             query: { lang: currentLang },
           }}
           className="text-blue-600 hover:underline inline-block"
@@ -35,7 +35,7 @@ export default function MemoPage({ memo, translation }: MemoPageProps) {
         {translation && (
           <Link
             href={{
-              pathname: `/weekly-memo/${translation.slug}`,
+              pathname: `/memo/${translation.slug}`,
               query: { lang: translation.language },
             }}
             className="text-blue-600 hover:underline inline-flex items-center"
@@ -68,7 +68,7 @@ export default function MemoPage({ memo, translation }: MemoPageProps) {
           <Link
             key={tag}
             href={{
-              pathname: `/weekly-memo/tag/${tag}`,
+              pathname: `/memo/tag/${tag}`,
               query: { lang: currentLang },
             }}
             className="text-sm bg-gray-100 px-2 py-1 rounded hover:bg-gray-200"

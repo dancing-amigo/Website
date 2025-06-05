@@ -35,7 +35,7 @@ const ArticleCard = ({ memo }: ArticleCardProps) => {
       <h2 className="text-2xl font-bold mb-2">
         <Link
           href={{
-            pathname: `/weekly-memo/${memo.slug}`,
+            pathname: `/memo/${memo.slug}`,
             query: { lang: memo.language },
           }}
           className="hover:underline"
@@ -63,7 +63,7 @@ const ArticleCard = ({ memo }: ArticleCardProps) => {
           <Link
             key={tag}
             href={{
-              pathname: `/weekly-memo/tag/${tag}`,
+              pathname: `/memo/tag/${tag}`,
               query: { lang: currentLang },
             }}
             className="text-xs bg-gray-100 px-2 py-1 rounded hover:bg-gray-200 transition-colors duration-200"

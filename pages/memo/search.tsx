@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import SearchBar from "../../components/SearchBar";
-import SearchResultCard from "../../components/weekly-memo/SearchResult";
+import SearchResultCard from "../../components/memo/SearchResult";
 import { searchMemosByKeyword } from "../../utils/markdown";
 import { SearchResult } from "../../types";
 import { useLanguage } from "../../contexts/LanguageContext";
@@ -69,7 +69,7 @@ export default function SearchResults({
         <div className="mt-2">
           <Link
             href={{
-              pathname: "/weekly-memo",
+              pathname: "/memo",
               query: { lang: currentLanguage },
             }}
             className="text-blue-600 hover:underline text-sm"
@@ -106,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   if (!searchQuery) {
     return {
       redirect: {
-        destination: `/weekly-memo?lang=${language}`,
+        destination: `/memo?lang=${language}`,
         permanent: false,
       },
     };

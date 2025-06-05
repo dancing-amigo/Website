@@ -34,7 +34,7 @@ export default function TagPage({
       <div className="mb-6">
         <Link
           href={{
-            pathname: "/weekly-memo",
+            pathname: "/memo",
             query: { lang: language },
           }}
           className="text-blue-600 hover:underline"
