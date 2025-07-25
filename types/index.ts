@@ -13,3 +13,9 @@ export interface SearchResult extends Post {
   matchLocations: string[];
   snippet: string;
 }
+
+export interface Principle {
+  slug: string;
+  title: string;
+  content: string;
+}

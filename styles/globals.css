@@ -68,3 +68,35 @@ a {
   border-radius: 0.25rem;
   font-size: 0.875rem;
 }
+
+.markdown-content blockquote {
+  border-left: 4px solid #e5e7eb;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #6b7280;
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.markdown-content ol {
+  counter-reset: item;
+  padding-left: 0;
+}
+
+.markdown-content ol > li {
+  display: block;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.markdown-content ol > li:before {
+  content: counter(item) ".";
+  counter-increment: item;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+}

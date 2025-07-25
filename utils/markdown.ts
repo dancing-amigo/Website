@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { Post, SearchResult } from "../types";
+import { Post, SearchResult, Principle } from "../types";
 
 const contentDirectory = path.join(process.cwd(), "content");
 
@@ -49,6 +49,44 @@ export function getAllMemos(language?: string): Post[] {
   return allMemos.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+}
+
+export function getAllPrinciples(language: string = "ja"): Principle[] {
+  const principlesDirectory = path.join(contentDirectory, "principles", language);
+  const slugs = fs
+    .readdirSync(principlesDirectory)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => file.replace(/\.md$/, ""));
+
+  const principles = slugs
+    .map((slug) => getPrincipleBySlug(slug, language))
+    .sort((a, b) => parseInt(a.slug) - parseInt(b.slug));
+
+  return principles;
+}
+
+export function getPrincipleBySlug(
+  slug: string,
+  language: string = "ja"
+): Principle {
+  const principlesDirectory = path.join(
+    contentDirectory,
+    "principles",
+    language
+  );
+  const fullPath = path.join(principlesDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { content } = matter(fileContents);
+
+  const lines = content.split('\n');
+  const title = lines[0].replace("# ", "");
+  const contentWithoutTitle = lines.slice(1).join('\n');
+
+  return {
+    slug,
+    content: contentWithoutTitle,
+    title,
+  };
 }
 
 // 翻訳リンクを取得する関数
