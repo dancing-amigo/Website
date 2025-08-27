@@ -1,6 +1,6 @@
 ---
 title: "A Fun Company"
-date: "2025-04-13"
+date: "2025-08-26"
 tags: []
 excerpt: "To be a fun company."
 translationKey: "fun-company"
