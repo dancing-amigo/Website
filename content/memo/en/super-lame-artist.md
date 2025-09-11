@@ -1,6 +1,6 @@
 ---
 title: "Super Lame Artist"
-date: "2025-04-13"
+date: "2025-09-11"
 tags: []
 excerpt: "An entrepreneur differs from an artist in that they seek recognition, and if you are an entrepreneur, you need to set aside artistic pride and focus on getting your work out to as many people as possible."
 translationKey: "super-lame-artist"
