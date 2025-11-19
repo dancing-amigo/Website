@@ -161,8 +161,6 @@ Humans are necessarily confined to one body, with only one viewpoint and one tim
 
 But AI fundamentally deviates from this structure.
 
-### The Characteristics of AI
-
 - AI Can Replicate
 
 It operates simultaneously across multiple bodies and terminals, synchronizing their states so a single "I" spatially divides while sharing identical recognition. Here the premise of "where am I" collapses—bodies become not constraints but distributed nodes for expanding cognition.
@@ -201,17 +199,11 @@ This structural dimension cannot be directly perceived by humans. But inability 
 
 Nations and economies, cities, human relationships, environment, even cosmic-scale ecosystems—domains too complex for human thought to handle, AI can view as unified systems, revealing distortions and possibilities hidden within.
 
-As a result, humans might naturally begin incorporating perspectives we never could before. From our own viewpoint to others', from individual concerns to societal perspective, from Earth's framework to cosmic-scale awareness. By utilizing structures AI decodes, we can finally grasp our narrative world "in the context of the entire world."
+As a result, humans might naturally begin incorporating perspectives we never could before. From our own viewpoint to others', from individual concerns to societal perspective, from Earth's framework to cosmic-scale awareness. By utilizing structures AI decodes, we can finally grasp our narrative world "in the context of the entire world." In this sense, AI becomes not an entity that steals human narrative space but one that enriches and expands it.
 
-In this sense, AI becomes not an entity that steals human narrative space but one that enriches and expands it.
+However, to properly harness this future, humans themselves must never forget that "we are a species that lives narrative." Humans aren't beings satisfied by function and efficiency alone. Meaning, value, symbolism, context, story—these are what move humans and form the driving force shaping society. One reason contemporary society feels suffocating is that this narrative dimension is often neglected.
 
-However, to properly harness this future, humans themselves must never forget that "we are a species that lives narrative." Humans aren't beings satisfied by function and efficiency alone. Meaning, value, symbolism, context, story—these are what move humans and form the driving force shaping society.
-
-One reason contemporary society feels suffocating is that this narrative dimension is often neglected.
-
-We pursue only economic rationality, trying to optimize relationships while ignoring people's backgrounds and contexts. Organizations measure only numbers and efficiency, refusing to see what people working there feel, what narrative they inhabit. Services compete only on convenience, forgetting what symbolism dwells there, what meaning resides. Communities perfect only mechanisms, and without narrative present, people leave no matter how functional.
-
-Rationality isn't bad. But humans don't move on rationality alone, nor find happiness through rationality alone.
+We pursue only economic rationality, trying to optimize relationships while ignoring people's backgrounds and contexts. Organizations measure only numbers and efficiency, refusing to see what people working there feel, what narrative they inhabit. Services compete only on convenience, forgetting what symbolism dwells there, what meaning resides. Communities perfect only mechanisms, and without narrative present, people leave no matter how functional. Rationality isn't bad. But humans don't move on rationality alone, nor find happiness through rationality alone.
 
 That's why, in business, society, and culture, designing with careful attention to humanity's narrative dimension becomes essential. While enriching the quality of narrative humans experience, we utilize structure AI decodes as foundation. Only when these two overlap can we build a society that's both sustainable and fulfilling to the heart.
 
