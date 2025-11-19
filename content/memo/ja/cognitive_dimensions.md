@@ -3,7 +3,7 @@ title: "認知次元の限界"
 date: "2025-11-18"
 tags: []
 excerpt: "人間は機能だけでなく物語を必要とする生物として進化し、その物語次元を生きる一方で、AIは複製・多視点・多時間という特性により人間には知覚不能な構造次元を開きつつあり、この二つの異なる認知次元が重なり合うところに新しい文明の可能性が生まれる。"
-translationKey: "cognitive_dimension"
+translationKey: "cognitive_dimensions"
 ---
 
 ## 1. 機能とアート：すべての創造は二つの軸でできている
