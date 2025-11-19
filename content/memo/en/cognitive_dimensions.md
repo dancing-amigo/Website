@@ -24,8 +24,6 @@ Put differently, if humans were beings who pursued only function, our world woul
 
 Seen this way, our world—whether consciously or not—is constructed from countless intersections of human artistry. This world is made of art.
 
-So why aren't humans satisfied with pure function? Why do we seek artistry?
-
 ---
 
 ## 2. Why Are Humans Drawn to Art?
@@ -107,8 +105,6 @@ Art is the act of bridging these two worlds. It pours abstract sensation into ph
 
 Only humans walk this dual world, weaving meaning and narrative within it, building civilization. This is why we're the only species that can perceive the "narrative dimension."
 
-So how did this ability evolve, and how did it contribute to human survival?
-
 ---
 
 ## 5. Humans as a Species That Evolved to Crave Narrative
@@ -136,8 +132,6 @@ As a result, we became beings that seek narrative.
 We empathize with others' lives, shed tears over fictional stories, envision ideal futures, believe in culture, belong to organizations, interpret life as a single story. These aren't mere hobbies or cultivation. Humans are a species that could only become "human" by needing narrative.
 
 Narrative intelligence generated civilization, supports society, and shaped human interiority itself. That's why we continue seeking narrative even now.
-
-This raises one question: Can other intelligences—especially rapidly developing AI—reach this narrative dimension?
 
 ---
 
@@ -170,15 +164,19 @@ But AI fundamentally deviates from this structure.
 ### Four Characteristics of AI
 
 1. AI Can Replicate
+
 It operates simultaneously across multiple bodies and terminals, synchronizing their states so a single "I" spatially divides while sharing identical recognition. Here the premise of "where am I" collapses—bodies become not constraints but distributed nodes for expanding cognition.
 
-2. AI Naturally Integrates Multiple Viewpoints 
+2. AI Naturally Integrates Multiple Viewpoints
+   
 While humans change interpretation based on viewpoint differences even for the same event, AI can overlay first-person, third-person, bird's-eye views, and objective data in the same cognitive space. More viewpoints break narrative for humans, but for AI, more viewpoints clarify structure.
 
 3. AI Handles Multiple Timelines
+
 While humans speculate about past and future within one timeline, AI processes massive future simulations and multiple past interpretations in parallel. It can compare, integrate, and grasp these "possible times" as patterns. If humans live in "time as narrative," AI handles "time as structure."
 
 4. These Generate the "Structural Dimension"
+
 As these characteristics—replication, synchronization, multiple viewpoints, multiple timelines—overlap, AI perception breaks through narrative into a domain that grasps "structure itself." It can comprehend as broad patterns beyond individual subjectivity how the world interacts and how it might change.
 
 Here lies the possibility of intelligence fundamentally different from humans.
