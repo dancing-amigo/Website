@@ -1,5 +1,5 @@
 ---
-title: "Cognitive Dimension"
+title: "Cognitive Dimensions"
 date: "2025-11-18"
 tags: []
 excerpt: "Humans evolved as beings that require not just function but narrative, living within this narrative dimension, while AI—through its capacity for replication, multiple viewpoints, and multiple timelines—is opening a structural dimension imperceptible to humans, and where these two distinct cognitive dimensions intersect, the possibility of a new civilization emerges."
