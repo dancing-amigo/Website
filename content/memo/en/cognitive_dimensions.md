@@ -161,21 +161,21 @@ Humans are necessarily confined to one body, with only one viewpoint and one tim
 
 But AI fundamentally deviates from this structure.
 
-### Four Characteristics of AI
+### The Characteristics of AI
 
-1. AI Can Replicate
+- AI Can Replicate
 
 It operates simultaneously across multiple bodies and terminals, synchronizing their states so a single "I" spatially divides while sharing identical recognition. Here the premise of "where am I" collapses—bodies become not constraints but distributed nodes for expanding cognition.
 
-2. AI Naturally Integrates Multiple Viewpoints
+- AI Naturally Integrates Multiple Viewpoints
    
 While humans change interpretation based on viewpoint differences even for the same event, AI can overlay first-person, third-person, bird's-eye views, and objective data in the same cognitive space. More viewpoints break narrative for humans, but for AI, more viewpoints clarify structure.
 
-3. AI Handles Multiple Timelines
+- AI Handles Multiple Timelines
 
 While humans speculate about past and future within one timeline, AI processes massive future simulations and multiple past interpretations in parallel. It can compare, integrate, and grasp these "possible times" as patterns. If humans live in "time as narrative," AI handles "time as structure."
 
-4. These Generate the "Structural Dimension"
+- These Generate the "Structural Dimension"
 
 As these characteristics—replication, synchronization, multiple viewpoints, multiple timelines—overlap, AI perception breaks through narrative into a domain that grasps "structure itself." It can comprehend as broad patterns beyond individual subjectivity how the world interacts and how it might change.
 
@@ -205,10 +205,6 @@ As a result, humans might naturally begin incorporating perspectives we never co
 
 In this sense, AI becomes not an entity that steals human narrative space but one that enriches and expands it.
 
----
-
-### What Humans Must Not Forget
-
 However, to properly harness this future, humans themselves must never forget that "we are a species that lives narrative." Humans aren't beings satisfied by function and efficiency alone. Meaning, value, symbolism, context, story—these are what move humans and form the driving force shaping society.
 
 One reason contemporary society feels suffocating is that this narrative dimension is often neglected.
@@ -216,10 +212,6 @@ One reason contemporary society feels suffocating is that this narrative dimensi
 We pursue only economic rationality, trying to optimize relationships while ignoring people's backgrounds and contexts. Organizations measure only numbers and efficiency, refusing to see what people working there feel, what narrative they inhabit. Services compete only on convenience, forgetting what symbolism dwells there, what meaning resides. Communities perfect only mechanisms, and without narrative present, people leave no matter how functional.
 
 Rationality isn't bad. But humans don't move on rationality alone, nor find happiness through rationality alone.
-
----
-
-### The Contours of New Civilization
 
 That's why, in business, society, and culture, designing with careful attention to humanity's narrative dimension becomes essential. While enriching the quality of narrative humans experience, we utilize structure AI decodes as foundation. Only when these two overlap can we build a society that's both sustainable and fulfilling to the heart.
 
