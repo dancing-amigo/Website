@@ -19,3 +19,12 @@ export interface Worldview {
   title: string;
   content: string;
 }
+
+// 統合検索結果
+export interface UnifiedSearchResult {
+  type: "memo" | "worldview" | "work";
+  title: string;
+  description: string;
+  url: string;
+  snippet?: string;
+}

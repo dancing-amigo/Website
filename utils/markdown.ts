@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { Post, SearchResult, Worldview } from "../types";
+import { Post, SearchResult, Worldview, UnifiedSearchResult } from "../types";
 
 const contentDirectory = path.join(process.cwd(), "content");
 
@@ -53,12 +53,12 @@ export function getAllMemos(language?: string): Post[] {
 
 export function getAllWorldviews(language: string = "ja"): Worldview[] {
   const worldviewDirectory = path.join(contentDirectory, "worldview", language);
-  
+
   // ディレクトリが存在しない場合は空配列を返す
   if (!fs.existsSync(worldviewDirectory)) {
     return [];
   }
-  
+
   const slugs = fs
     .readdirSync(worldviewDirectory)
     .filter((file) => file.endsWith(".md"))
@@ -75,18 +75,14 @@ export function getWorldviewBySlug(
   slug: string,
   language: string = "ja"
 ): Worldview {
-  const worldviewDirectory = path.join(
-    contentDirectory,
-    "worldview",
-    language
-  );
+  const worldviewDirectory = path.join(contentDirectory, "worldview", language);
   const fullPath = path.join(worldviewDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content } = matter(fileContents);
 
-  const lines = content.split('\n');
+  const lines = content.split("\n");
   const title = lines[0].replace("# ", "");
-  const contentWithoutTitle = lines.slice(1).join('\n');
+  const contentWithoutTitle = lines.slice(1).join("\n");
 
   return {
     slug,
@@ -243,4 +239,139 @@ export function getAllTags(
   return Object.keys(tagCount)
     .map((tag) => ({ tag, count: tagCount[tag] }))
     .sort((a, b) => b.count - a.count);
+}
+
+// Work データ（静的）
+const worksData = [
+  {
+    title: "Singular Radio",
+    description: {
+      ja: "テクノロジー、思考、未来について語るPodcast",
+      en: "A podcast about technology, thinking, and the future",
+    },
+    url: "https://www.youtube.com/@SingularRadio",
+  },
+  {
+    title: "Laplace",
+    description: {
+      ja: "戦略と確率のボードゲーム",
+      en: "A board game of strategy and probability",
+    },
+    url: "https://www.laplace.zone/",
+  },
+  {
+    title: "YouTube",
+    description: {
+      ja: "個人チャンネル",
+      en: "Personal channel",
+    },
+    url: "https://www.youtube.com/@takeshi-hashimoto",
+  },
+  {
+    title: "X",
+    description: {
+      ja: "@dancing_amigo",
+      en: "@dancing_amigo",
+    },
+    url: "https://x.com/dancing_amigo",
+  },
+];
+
+// 統合検索関数
+export function searchAll(
+  keyword: string,
+  language: string = "en"
+): UnifiedSearchResult[] {
+  if (!keyword || keyword.trim() === "") {
+    return [];
+  }
+
+  const lowercasedKeyword = keyword.toLowerCase().trim();
+  const results: UnifiedSearchResult[] = [];
+
+  // Memo を検索
+  const allMemos = getAllMemos(language);
+  allMemos.forEach((memo) => {
+    const inTitle = memo.title.toLowerCase().includes(lowercasedKeyword);
+    const inContent = memo.content.toLowerCase().includes(lowercasedKeyword);
+    const inExcerpt = memo.excerpt.toLowerCase().includes(lowercasedKeyword);
+    const inTags = memo.tags.some((tag) =>
+      tag.toLowerCase().includes(lowercasedKeyword)
+    );
+
+    if (inTitle || inContent || inExcerpt || inTags) {
+      let snippet = memo.excerpt;
+      if (inContent) {
+        const contentLower = memo.content.toLowerCase();
+        const keywordIndex = contentLower.indexOf(lowercasedKeyword);
+        const snippetStart = Math.max(0, keywordIndex - 50);
+        const snippetEnd = Math.min(
+          memo.content.length,
+          keywordIndex + lowercasedKeyword.length + 50
+        );
+        snippet = memo.content.substring(snippetStart, snippetEnd).trim();
+        if (snippetStart > 0) snippet = "..." + snippet;
+        if (snippetEnd < memo.content.length) snippet = snippet + "...";
+      }
+
+      results.push({
+        type: "memo",
+        title: memo.title,
+        description: language === "ja" ? "メモ" : "Memo",
+        url: `/memo/${memo.slug}?lang=${memo.language}`,
+        snippet,
+      });
+    }
+  });
+
+  // Worldview を検索
+  const allWorldviews = getAllWorldviews(language);
+  allWorldviews.forEach((worldview) => {
+    const inTitle = worldview.title.toLowerCase().includes(lowercasedKeyword);
+    const inContent = worldview.content
+      .toLowerCase()
+      .includes(lowercasedKeyword);
+
+    if (inTitle || inContent) {
+      let snippet = "";
+      if (inContent) {
+        const contentLower = worldview.content.toLowerCase();
+        const keywordIndex = contentLower.indexOf(lowercasedKeyword);
+        const snippetStart = Math.max(0, keywordIndex - 50);
+        const snippetEnd = Math.min(
+          worldview.content.length,
+          keywordIndex + lowercasedKeyword.length + 50
+        );
+        snippet = worldview.content.substring(snippetStart, snippetEnd).trim();
+        if (snippetStart > 0) snippet = "..." + snippet;
+        if (snippetEnd < worldview.content.length) snippet = snippet + "...";
+      }
+
+      results.push({
+        type: "worldview",
+        title: worldview.title,
+        description: language === "ja" ? "世界観" : "Worldview",
+        url: `/worldview?lang=${language}`,
+        snippet,
+      });
+    }
+  });
+
+  // Work を検索
+  worksData.forEach((work) => {
+    const desc = work.description[language as "ja" | "en"];
+    const inTitle = work.title.toLowerCase().includes(lowercasedKeyword);
+    const inDescription = desc.toLowerCase().includes(lowercasedKeyword);
+
+    if (inTitle || inDescription) {
+      results.push({
+        type: "work",
+        title: work.title,
+        description: language === "ja" ? "作品" : "Work",
+        url: work.url,
+      });
+    }
+  });
+
+  return results;
 }

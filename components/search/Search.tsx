@@ -4,13 +4,9 @@ import { useLanguage } from "../../contexts/LanguageContext";
 
 interface SearchProps {
   initialQuery?: string;
-  searchPath?: string;
 }
 
-const Search = ({
-  initialQuery = "",
-  searchPath = "/memo/search",
-}: SearchProps) => {
+const Search = ({ initialQuery = "" }: SearchProps) => {
   const router = useRouter();
   const { language } = useLanguage();
   const [searchTerm, setSearchTerm] = useState(initialQuery);
@@ -27,7 +23,7 @@ const Search = ({
     e.preventDefault();
     if (searchTerm.trim()) {
       router.push({
-        pathname: searchPath,
+        pathname: "/search",
         query: { q: searchTerm.trim(), lang: language },
       });
     }
