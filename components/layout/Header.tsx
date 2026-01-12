@@ -13,8 +13,8 @@ const Header = () => {
       path: "/memo",
     },
     {
-      name: language === "ja" ? "原則" : "Principles",
-      path: "/principles",
+      name: language === "ja" ? "世界観" : "Worldview",
+      path: "/worldview",
     },
     {
       name: language === "ja" ? "作品" : "Work",

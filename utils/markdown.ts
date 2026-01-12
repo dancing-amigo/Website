@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { Post, SearchResult, Principle } from "../types";
+import { Post, SearchResult, Worldview } from "../types";
 
 const contentDirectory = path.join(process.cwd(), "content");
 
@@ -51,30 +51,36 @@ export function getAllMemos(language?: string): Post[] {
   );
 }
 
-export function getAllPrinciples(language: string = "ja"): Principle[] {
-  const principlesDirectory = path.join(contentDirectory, "principles", language);
+export function getAllWorldviews(language: string = "ja"): Worldview[] {
+  const worldviewDirectory = path.join(contentDirectory, "worldview", language);
+  
+  // ディレクトリが存在しない場合は空配列を返す
+  if (!fs.existsSync(worldviewDirectory)) {
+    return [];
+  }
+  
   const slugs = fs
-    .readdirSync(principlesDirectory)
+    .readdirSync(worldviewDirectory)
     .filter((file) => file.endsWith(".md"))
     .map((file) => file.replace(/\.md$/, ""));
 
-  const principles = slugs
-    .map((slug) => getPrincipleBySlug(slug, language))
+  const worldviews = slugs
+    .map((slug) => getWorldviewBySlug(slug, language))
     .sort((a, b) => parseInt(a.slug) - parseInt(b.slug));
 
-  return principles;
+  return worldviews;
 }
 
-export function getPrincipleBySlug(
+export function getWorldviewBySlug(
   slug: string,
   language: string = "ja"
-): Principle {
-  const principlesDirectory = path.join(
+): Worldview {
+  const worldviewDirectory = path.join(
     contentDirectory,
-    "principles",
+    "worldview",
     language
   );
-  const fullPath = path.join(principlesDirectory, `${slug}.md`);
+  const fullPath = path.join(worldviewDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content } = matter(fileContents);
 

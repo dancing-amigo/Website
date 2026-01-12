@@ -14,7 +14,7 @@ export interface SearchResult extends Post {
   snippet: string;
 }
 
-export interface Principle {
+export interface Worldview {
   slug: string;
   title: string;
   content: string;
