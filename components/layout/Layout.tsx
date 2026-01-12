@@ -19,15 +19,17 @@ const Layout = ({ children, title }: LayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <div className="min-h-screen flex flex-col">
+        <Header />
 
-      <main className="container mx-auto px-4 py-8">{children}</main>
+        <main className="flex-1 container-narrow py-8 md:py-12">
+          {children}
+        </main>
 
-      <footer className="container mx-auto px-4 py-8 border-t border-gray-200 mt-12">
-        <p className="text-center text-gray-500">
-          © {new Date().getFullYear()} Takeshi Hashimoto
-        </p>
-      </footer>
+        <footer className="container-narrow py-12 border-t border-border">
+          <p className="text-muted text-small">© {new Date().getFullYear()}</p>
+        </footer>
+      </div>
 
       <Analytics />
     </>

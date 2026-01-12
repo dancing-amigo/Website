@@ -16,18 +16,15 @@ export default function MemoPage({ memo, translation }: MemoPageProps) {
   const router = useRouter();
   const currentLang = (router.query.lang as string) || "en";
 
-  const backLabel =
-    currentLang === "ja" ? "← メモ一覧に戻る" : "← Back to all memos";
+  const backLabel = currentLang === "ja" ? "← 戻る" : "← Back";
 
   return (
-    <article className="max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-4">
+    <article className="fade-in max-w-prose">
+      {/* ナビゲーション */}
+      <nav className="flex items-center justify-between mb-12 text-small">
         <Link
-          href={{
-            pathname: "/memo",
-            query: { lang: currentLang },
-          }}
-          className="text-blue-600 hover:underline inline-block"
+          href={{ pathname: "/memo", query: { lang: currentLang } }}
+          className="text-muted hover:text-primary"
         >
           {backLabel}
         </Link>
@@ -38,46 +35,25 @@ export default function MemoPage({ memo, translation }: MemoPageProps) {
               pathname: `/memo/${translation.slug}`,
               query: { lang: translation.language },
             }}
-            className="text-blue-600 hover:underline inline-flex items-center"
+            className="text-muted hover:text-primary"
           >
-            {translation.language === "ja"
-              ? "🇯🇵 日本語で読む"
-              : "🇺🇸 Read in English"}
+            {translation.language === "ja" ? "日本語" : "English"}
           </Link>
         )}
-      </div>
+      </nav>
 
-      <h1 className="text-3xl font-bold mb-2">{memo.title}</h1>
+      {/* ヘッダー */}
+      <header className="mb-12">
+        <time className="text-small text-muted">
+          {new Date(memo.date).toLocaleDateString(
+            currentLang === "ja" ? "ja-JP" : "en-US",
+            { year: "numeric", month: "long", day: "numeric" }
+          )}
+        </time>
+        <h1 className="font-serif text-display mt-4">{memo.title}</h1>
+      </header>
 
-      <div className="text-gray-500 mb-4">
-        {new Date(memo.date).toLocaleDateString(
-          currentLang === "ja" ? "ja-JP" : "en-US",
-          {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }
-        )}
-        <span className="ml-2 text-xs px-2 py-1 bg-gray-100 rounded">
-          {memo.language === "ja" ? "🇯🇵 日本語" : "🇺🇸 English"}
-        </span>
-      </div>
-
-      <div className="flex flex-wrap gap-2 mb-6">
-        {memo.tags.map((tag) => (
-          <Link
-            key={tag}
-            href={{
-              pathname: `/memo/tag/${tag}`,
-              query: { lang: currentLang },
-            }}
-            className="text-sm bg-gray-100 px-2 py-1 rounded hover:bg-gray-200"
-          >
-            #{tag}
-          </Link>
-        ))}
-      </div>
-
+      {/* コンテンツ */}
       <div className="markdown-content">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -86,6 +62,26 @@ export default function MemoPage({ memo, translation }: MemoPageProps) {
           {memo.content}
         </ReactMarkdown>
       </div>
+
+      {/* タグ */}
+      {memo.tags.length > 0 && (
+        <footer className="mt-16 pt-8 border-t border-border">
+          <div className="flex flex-wrap gap-3">
+            {memo.tags.map((tag) => (
+              <Link
+                key={tag}
+                href={{
+                  pathname: `/memo/tag/${tag}`,
+                  query: { lang: currentLang },
+                }}
+                className="text-small text-muted hover:text-primary"
+              >
+                {tag}
+              </Link>
+            ))}
+          </div>
+        </footer>
+      )}
     </article>
   );
 }
@@ -99,8 +95,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   try {
     const memo = getMemoBySlug(slug, language);
-
-    // 翻訳を取得
     const targetLang = memo.language === "ja" ? "en" : "ja";
     const translation = getTranslation(memo, targetLang);
 
@@ -112,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   } catch (error) {
     return {
-      notFound: true, // 記事が見つからない場合は404
+      notFound: true,
     };
   }
 };

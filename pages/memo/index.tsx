@@ -1,10 +1,9 @@
 import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
-import SearchBar from "../../components/SearchBar";
+import Link from "next/link";
 import MemoList from "../../components/MemoList";
-import TagCloud from "../../components/TagCloud";
 import { getAllMemos, getAllTags } from "../../utils/markdown";
 import { Post } from "../../types";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 interface MemoPageProps {
   memos: Post[];
@@ -12,30 +11,44 @@ interface MemoPageProps {
   language: string;
 }
 
-export default function MemoPage({
-  memos,
-  tags,
-  language,
-}: MemoPageProps) {
-  const router = useRouter();
+export default function MemoPage({ memos, tags, language }: MemoPageProps) {
+  const { language: contextLanguage } = useLanguage();
+  const currentLang = language || contextLanguage;
 
-  const title = language === "ja" ? "メモ" : "Memo";
+  const title = currentLang === "ja" ? "メモ" : "Memo";
+  const description =
+    currentLang === "ja"
+      ? "思考の断片、学びの記録"
+      : "Fragments of thought, records of learning";
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">{title}</h1>
+    <div className="fade-in">
+      <header className="mb-16">
+        <h1 className="font-serif text-display mb-4">{title}</h1>
+        <p className="text-secondary">{description}</p>
+      </header>
 
-      <SearchBar />
-
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="md:w-3/4">
-          <MemoList memos={memos} />
+      {/* タグ - シンプルなインラインリスト */}
+      {tags.length > 0 && (
+        <div className="mb-12 pb-8 border-b border-border">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {tags.slice(0, 10).map(({ tag }) => (
+              <Link
+                key={tag}
+                href={{
+                  pathname: `/memo/tag/${tag}`,
+                  query: { lang: currentLang },
+                }}
+                className="text-small text-muted hover:text-primary"
+              >
+                {tag}
+              </Link>
+            ))}
+          </div>
         </div>
+      )}
 
-        <aside className="md:w-1/4">
-          <TagCloud tags={tags} />
-        </aside>
-      </div>
+      <MemoList memos={memos} />
     </div>
   );
 }

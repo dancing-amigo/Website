@@ -1,8 +1,6 @@
 import { GetServerSideProps } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import MemoList from "../../../components/MemoList";
-import TagCloud from "../../../components/TagCloud";
 import { getMemosByTag, getAllTags } from "../../../utils/markdown";
 import { Post } from "../../../types";
 
@@ -13,45 +11,29 @@ interface TagPageProps {
   language: string;
 }
 
-export default function TagPage({
-  memos,
-  tag,
-  allTags,
-  language,
-}: TagPageProps) {
-  const router = useRouter();
-  const backLabel =
-    language === "ja" ? "← メモ一覧に戻る" : "← Back to all memos";
+export default function TagPage({ memos, tag, allTags, language }: TagPageProps) {
+  const backLabel = language === "ja" ? "← 戻る" : "← Back";
+  const title = language === "ja" ? `${tag}` : `${tag}`;
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">
-        {language === "ja"
-          ? `「${tag}」のタグがついたメモ`
-          : `Memos tagged with "${tag}"`}
-      </h1>
-
-      <div className="mb-6">
+    <div className="fade-in">
+      <nav className="mb-12">
         <Link
-          href={{
-            pathname: "/memo",
-            query: { lang: language },
-          }}
-          className="text-blue-600 hover:underline"
+          href={{ pathname: "/memo", query: { lang: language } }}
+          className="text-small text-muted hover:text-primary"
         >
           {backLabel}
         </Link>
-      </div>
+      </nav>
 
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="md:w-3/4">
-          <MemoList memos={memos} />
-        </div>
+      <header className="mb-16">
+        <h1 className="font-serif text-display">{title}</h1>
+        <p className="text-muted mt-2">
+          {memos.length} {language === "ja" ? "件" : memos.length === 1 ? "post" : "posts"}
+        </p>
+      </header>
 
-        <aside className="md:w-1/4">
-          <TagCloud tags={allTags} />
-        </aside>
-      </div>
+      <MemoList memos={memos} />
     </div>
   );
 }

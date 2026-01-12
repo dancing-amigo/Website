@@ -8,37 +8,28 @@ const AnonymousMessageForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  // 多言語対応用のテキスト
   const texts = {
-    title: language === "ja" ? "匿名メッセージ" : "Anonymous Message",
+    title: language === "ja" ? "メッセージ" : "Message",
     placeholder:
       language === "ja"
-        ? "あなたの考えやフィードバックを共有してください..."
-        : "Share your thoughts or feedback...",
+        ? "何かあればどうぞ..."
+        : "Feel free to share anything...",
     submitButton: language === "ja" ? "送信" : "Send",
     sending: language === "ja" ? "送信中..." : "Sending...",
     successMessage:
       language === "ja"
-        ? "メッセージが送信されました。ありがとうございます！"
-        : "Message sent successfully. Thank you!",
+        ? "送信しました。"
+        : "Sent. Thank you.",
     errorMessage:
       language === "ja"
-        ? "送信中にエラーが発生しました。後でもう一度お試しください。"
-        : "An error occurred while sending. Please try again later.",
-    messageRequired:
-      language === "ja"
-        ? "メッセージを入力してください"
-        : "Please enter a message",
+        ? "エラーが発生しました。"
+        : "An error occurred.",
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 基本的なバリデーション
-    if (!message.trim()) {
-      setError(texts.messageRequired);
-      return;
-    }
+    if (!message.trim()) return;
 
     setIsSubmitting(true);
     setError("");
@@ -46,22 +37,16 @@ const AnonymousMessageForm = () => {
     try {
       const response = await fetch("/api/send-message", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to send message");
-      }
+      if (!response.ok) throw new Error("Failed");
 
-      // 成功したらフォームをリセット
       setMessage("");
       setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 5000); // 5秒後に成功メッセージを非表示
+      setTimeout(() => setSubmitted(false), 3000);
     } catch (err) {
-      console.error("Error sending message:", err);
       setError(texts.errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -69,36 +54,32 @@ const AnonymousMessageForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mt-8">
-      <h3 className="text-xl font-medium mb-4">{texts.title}</h3>
+    <div className="border-t border-border pt-16 mt-24">
+      <h3 className="font-serif text-xl mb-6">{texts.title}</h3>
 
       {submitted ? (
-        <div className="text-green-600 py-3">{texts.successMessage}</div>
+        <p className="text-muted">{texts.successMessage}</p>
       ) : (
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
-              rows={4}
-              placeholder={texts.placeholder}
-              disabled={isSubmitting}
-            />
-            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-          </div>
-
-          <button
-            type="submit"
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="w-full max-w-md px-0 py-3 text-body bg-transparent border-0 border-b border-border focus:border-primary focus:outline-none resize-none transition-colors"
+            rows={3}
+            placeholder={texts.placeholder}
             disabled={isSubmitting}
-            className={`px-4 py-2 rounded-md text-white font-medium ${
-              isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
-            }`}
-          >
-            {isSubmitting ? texts.sending : texts.submitButton}
-          </button>
+          />
+          {error && <p className="text-red-600 text-small mt-2">{error}</p>}
+
+          <div className="mt-4">
+            <button
+              type="submit"
+              disabled={isSubmitting || !message.trim()}
+              className="text-small text-muted hover:text-primary disabled:opacity-30 transition-colors"
+            >
+              {isSubmitting ? texts.sending : texts.submitButton}
+            </button>
+          </div>
         </form>
       )}
     </div>

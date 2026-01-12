@@ -1,102 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  @apply text-primary bg-background;
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@layer base {
+  html {
+    @apply antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  body {
+    @apply bg-background text-primary font-sans;
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  /* 哲学的なタイポグラフィ - セリフをタイトルに */
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-medium tracking-tight;
+  }
+
+  h1 {
+    @apply text-display;
+  }
+
+  h2 {
+    @apply text-title;
+  }
+
+  /* リンクはシンプルに */
+  a {
+    @apply text-primary no-underline transition-opacity duration-200;
+  }
+
+  a:hover {
+    @apply opacity-60;
+  }
+
+  /* セレクション */
+  ::selection {
+    @apply bg-primary text-white;
+  }
 }
 
-a {
-  @apply text-blue-600 hover:text-blue-800;
-  text-decoration: none;
+@layer components {
+  /* コンテナ */
+  .container-narrow {
+    @apply max-w-content mx-auto px-6;
+  }
+
+  /* マークダウンコンテンツ */
+  .markdown-content {
+    @apply max-w-prose;
+    line-height: 1.8;
+  }
+
+  .markdown-content h1 {
+    @apply font-serif text-display mt-16 mb-8;
+  }
+
+  .markdown-content h2 {
+    @apply font-serif text-title mt-14 mb-6;
+  }
+
+  .markdown-content h3 {
+    @apply font-serif text-xl mt-10 mb-4;
+  }
+
+  .markdown-content p {
+    @apply mb-6 text-body;
+  }
+
+  .markdown-content ul,
+  .markdown-content ol {
+    @apply pl-6 mb-6;
+  }
+
+  .markdown-content li {
+    @apply mb-3;
+  }
+
+  .markdown-content pre {
+    @apply bg-white border border-border p-6 my-8 overflow-x-auto text-sm;
+  }
+
+  .markdown-content code {
+    @apply bg-white border border-border px-2 py-1 text-sm font-mono;
+  }
+
+  .markdown-content pre code {
+    @apply border-0 p-0 bg-transparent;
+  }
+
+  .markdown-content blockquote {
+    @apply border-l-2 border-primary pl-6 my-8 italic text-secondary;
+  }
+
+  .markdown-content hr {
+    @apply my-16 border-0 h-px bg-border;
+  }
+
+  .markdown-content ol {
+    counter-reset: item;
+    padding-left: 0;
+  }
+
+  .markdown-content ol > li {
+    display: block;
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .markdown-content ol > li:before {
+    content: counter(item) ".";
+    counter-increment: item;
+    font-weight: 500;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #8a8a8a;
+  }
+
+  /* 区切り線 */
+  .divider {
+    @apply h-px bg-border my-12;
+  }
 }
 
-* {
-  box-sizing: border-box;
-}
+@layer utilities {
+  /* フェードイン */
+  .fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
 
-/* Temporarily replace typography plugin styles */
-.markdown-content {
-  max-width: none;
-  line-height: 1.6;
-}
-
-.markdown-content h1 {
-  font-size: 2.25rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.markdown-content h2 {
-  font-size: 1.875rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-}
-
-.markdown-content p {
-  margin-bottom: 1rem;
-}
-
-.markdown-content ul,
-.markdown-content ol {
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.markdown-content li {
-  margin-bottom: 0.5rem;
-}
-
-.markdown-content pre {
-  background-color: #f7f7f7;
-  padding: 1rem;
-  border-radius: 0.25rem;
-  overflow-x: auto;
-  margin-bottom: 1rem;
-}
-
-.markdown-content code {
-  background-color: #f7f7f7;
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-}
-
-.markdown-content blockquote {
-  border-left: 4px solid #e5e7eb;
-  padding-left: 1rem;
-  margin: 1.5rem 0;
-  font-style: italic;
-  color: #6b7280;
-  background-color: #f9fafb;
-  padding: 1rem;
-  border-radius: 0.25rem;
-}
-
-.markdown-content ol {
-  counter-reset: item;
-  padding-left: 0;
-}
-
-.markdown-content ol > li {
-  display: block;
-  margin-bottom: 0.5rem;
-  position: relative;
-  padding-left: 2rem;
-}
-
-.markdown-content ol > li:before {
-  content: counter(item) ".";
-  counter-increment: item;
-  font-weight: bold;
-  position: absolute;
-  left: 0;
-  top: 0;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

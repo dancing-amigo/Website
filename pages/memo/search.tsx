@@ -1,11 +1,9 @@
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import SearchBar from "../../components/SearchBar";
-import SearchResultCard from "../../components/memo/SearchResult";
+import { useState } from "react";
 import { searchMemosByKeyword } from "../../utils/markdown";
 import { SearchResult } from "../../types";
-import { useLanguage } from "../../contexts/LanguageContext";
 
 interface SearchResultsProps {
   results: SearchResult[];
@@ -19,79 +17,80 @@ export default function SearchResults({
   language,
 }: SearchResultsProps) {
   const router = useRouter();
-  const { language: contextLanguage } = useLanguage();
-  const currentLanguage = language || contextLanguage;
+  const [searchTerm, setSearchTerm] = useState(query);
 
-  const title = currentLanguage === "ja" ? "検索結果" : "Search Results";
+  const title = language === "ja" ? "検索" : "Search";
+  const backLabel = language === "ja" ? "← 戻る" : "← Back";
+  const placeholder = language === "ja" ? "検索..." : "Search...";
   const resultsText =
-    currentLanguage === "ja"
-      ? `"${query}" の検索結果: ${results.length}件${
-          results.length === 1 ? "" : ""
-        }`
-      : `${results.length} ${
-          results.length === 1 ? "result" : "results"
-        } for "${query}"`;
-  const backLabel =
-    currentLanguage === "ja" ? "← メモ一覧に戻る" : "← Back to all memos";
+    language === "ja"
+      ? `${results.length}件の結果`
+      : `${results.length} ${results.length === 1 ? "result" : "results"}`;
 
-  // より詳細なヘルプメッセージ
-  const noResultsText =
-    currentLanguage === "ja" ? (
-      <>
-        <p>「{query}」に一致する結果が見つかりませんでした。</p>
-        <ul className="list-disc ml-5 mt-3 text-sm text-gray-600">
-          <li>別のキーワードを試してください</li>
-          <li>
-            単語の一部だけで検索する（例: "プログラミング" → "プログラム"）
-          </li>
-          <li>より一般的な用語を使用する</li>
-        </ul>
-      </>
-    ) : (
-      <>
-        <p>No results found for "{query}".</p>
-        <ul className="list-disc ml-5 mt-3 text-sm text-gray-600">
-          <li>Try different keywords</li>
-          <li>Use partial words (e.g., "program" instead of "programming")</li>
-          <li>Use more general terms</li>
-        </ul>
-      </>
-    );
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      router.push({
+        pathname: "/memo/search",
+        query: { q: searchTerm.trim(), lang: language },
+      });
+    }
+  };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">{title}</h1>
+    <div className="fade-in">
+      <nav className="mb-12">
+        <Link
+          href={{ pathname: "/memo", query: { lang: language } }}
+          className="text-small text-muted hover:text-primary"
+        >
+          {backLabel}
+        </Link>
+      </nav>
 
-      <SearchBar />
+      <header className="mb-12">
+        <h1 className="font-serif text-display mb-8">{title}</h1>
 
-      <div className="mb-8 p-4 bg-gray-50 rounded-lg">
-        <p className="text-lg font-medium text-gray-700">{resultsText}</p>
-        <div className="mt-2">
-          <Link
-            href={{
-              pathname: "/memo",
-              query: { lang: currentLanguage },
-            }}
-            className="text-blue-600 hover:underline text-sm"
-          >
-            {backLabel}
-          </Link>
-        </div>
-      </div>
+        {/* 検索フォーム */}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder={placeholder}
+            className="w-full max-w-md px-0 py-2 text-body bg-transparent border-0 border-b border-border focus:border-primary focus:outline-none transition-colors"
+          />
+        </form>
+      </header>
 
-      {results.length === 0 ? (
-        <div className="text-center py-10 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          {noResultsText}
-        </div>
-      ) : (
-        <div className="space-y-8">
+      {query && (
+        <p className="text-muted text-small mb-8">{resultsText}</p>
+      )}
+
+      {results.length > 0 && (
+        <div className="space-y-0">
           {results.map((result) => (
-            <SearchResultCard
+            <article
               key={result.slug}
-              result={result}
-              searchTerm={query}
-              language={currentLanguage}
-            />
+              className="group py-6 border-b border-border"
+            >
+              <Link
+                href={{
+                  pathname: `/memo/${result.slug}`,
+                  query: { lang: result.language },
+                }}
+                className="block"
+              >
+                <h2 className="font-serif text-xl group-hover:opacity-60 transition-opacity">
+                  {result.title}
+                </h2>
+                {result.snippet && (
+                  <p className="mt-2 text-secondary text-small line-clamp-2">
+                    {result.snippet}
+                  </p>
+                )}
+              </Link>
+            </article>
           ))}
         </div>
       )}
@@ -105,9 +104,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   if (!searchQuery) {
     return {
-      redirect: {
-        destination: `/memo?lang=${language}`,
-        permanent: false,
+      props: {
+        results: [],
+        query: "",
+        language,
       },
     };
   }

@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { GetServerSideProps } from "next";
-import MemoList from "../components/MemoList";
-import AnonymousMessageForm from "../components/contact/AnonymousMessageForm";
 import { getAllMemos } from "../utils/markdown";
 import { Post } from "../types";
 import { useLanguage } from "../contexts/LanguageContext";
+import Search from "../components/search/Search";
 
 interface HomeProps {
   latestMemos: Post[];
@@ -13,43 +12,57 @@ interface HomeProps {
 export default function Home({ latestMemos }: HomeProps) {
   const { language } = useLanguage();
 
-  const title =
-    language === "ja"
-      ? "私の個人サイトへようこそ"
-      : "Welcome to My Personal Site";
-
-  const subtitle =
-    language === "ja"
-      ? "私の考え、原則、そして作品を世界と共有する場所です。"
-      : "A place where I share my thoughts, principles, and work with the world.";
-
-  const latestMemosTitle =
-    language === "ja" ? "最新のメモ" : "Latest Memos";
-  const viewAllLabel = language === "ja" ? "すべて見る" : "View all";
-
   return (
-    <div>
+    <div className="fade-in">
+      {/* タイトル */}
+      <section className="mb-12">
+        <h1 className="font-serif text-display">Takeshi's Blog</h1>
+      </section>
 
+      {/* 検索 */}
+      <section className="mb-16">
+        <Search />
+      </section>
+
+      {/* 最新のメモ */}
       <section>
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">{latestMemosTitle}</h2>
+        <div className="flex items-baseline justify-between mb-10">
+          <h2 className="font-serif text-title">
+            {language === "ja" ? "最新のメモ" : "Recent"}
+          </h2>
           <Link
-            href={{
-              pathname: "/memo",
-              query: { lang: language },
-            }}
-            className="text-blue-600 hover:underline"
+            href={{ pathname: "/memo", query: { lang: language } }}
+            className="text-small text-muted hover:text-primary"
           >
-            {viewAllLabel}
+            {language === "ja" ? "すべて見る →" : "View all →"}
           </Link>
         </div>
 
-        <MemoList memos={latestMemos} />
-      </section>
-
-      {/* 匿名メッセージフォームを追加 */}
-      <section className="mt-16">
-        <AnonymousMessageForm />
+        <div className="space-y-8">
+          {latestMemos.map((memo) => (
+            <article key={memo.slug} className="group">
+              <Link
+                href={{
+                  pathname: `/memo/${memo.slug}`,
+                  query: { lang: memo.language },
+                }}
+                className="block"
+              >
+                <div className="flex items-baseline gap-4">
+                  <time className="text-small text-muted shrink-0 tabular-nums">
+                    {new Date(memo.date).toLocaleDateString(
+                      memo.language === "ja" ? "ja-JP" : "en-US",
+                      { month: "short", day: "numeric" }
+                    )}
+                  </time>
+                  <h3 className="font-serif text-xl group-hover:opacity-60 transition-opacity">
+                    {memo.title}
+                  </h3>
+                </div>
+              </Link>
+            </article>
+          ))}
+        </div>
       </section>
     </div>
   );

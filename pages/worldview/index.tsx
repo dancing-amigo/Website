@@ -9,28 +9,38 @@ interface WorldviewPageProps {
   language: string;
 }
 
-export default function WorldviewPage({ worldviews, language }: WorldviewPageProps) {
+export default function WorldviewPage({
+  worldviews,
+  language,
+}: WorldviewPageProps) {
   const title = language === "ja" ? "世界観" : "Worldview";
-  const emptyMessage = language === "ja" 
-    ? "まだ世界観の記事はありません。" 
-    : "No worldview articles yet.";
+  const description =
+    language === "ja"
+      ? "世界をどのように理解しているか"
+      : "How I understand the world";
+  const emptyMessage =
+    language === "ja" ? "まだ記事はありません。" : "No articles yet.";
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">{title}</h1>
+    <div className="fade-in">
+      <header className="mb-16 text-left">
+        <h1 className="font-serif text-display mb-4">{title}</h1>
+        <p className="text-secondary">{description}</p>
+      </header>
+
       {worldviews.length === 0 ? (
-        <p className="text-gray-500">{emptyMessage}</p>
+        <p className="text-muted">{emptyMessage}</p>
       ) : (
-        <div>
+        <div className="space-y-24">
           {worldviews.map((worldview) => (
-            <div key={worldview.slug} className="mb-24">
-              <h2 className="text-2xl font-bold mb-4">{worldview.title}</h2>
+            <article key={worldview.slug}>
+              <h2 className="font-serif text-title mb-8">{worldview.title}</h2>
               <div className="markdown-content">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {worldview.content}
                 </ReactMarkdown>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       )}

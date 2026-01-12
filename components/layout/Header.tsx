@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import LanguageSwitcher from "../language/LanguageSwitcher";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 const Header = () => {
   const router = useRouter();
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   const navItems = [
+    {
+      name: language === "ja" ? "ホーム" : "Home",
+      path: "/",
+    },
     {
       name: language === "ja" ? "メモ" : "Memo",
       path: "/memo",
@@ -22,45 +25,51 @@ const Header = () => {
     },
   ];
 
-  // 現在のクエリパラメータを保持しつつリンクを生成
   const createLinkHref = (pathname: string) => ({
     pathname,
     query: { lang: language },
   });
 
+  const toggleLanguage = () => {
+    setLanguage(language === "ja" ? "en" : "ja");
+  };
+
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return router.pathname === "/";
+    }
+    return router.pathname.startsWith(path);
+  };
+
   return (
-    <header className="border-b border-gray-200 py-4">
-      <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
-        <Link
-          href={createLinkHref("/")}
-          className="text-2xl font-bold mb-4 sm:mb-0"
+    <header className="px-6 py-8">
+      <nav className="flex items-baseline">
+        {/* ナビゲーション - 左側 */}
+        <ul className="flex items-center gap-6">
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <Link
+                href={createLinkHref(item.path)}
+                className={`text-small transition-opacity ${
+                  isActive(item.path)
+                    ? "opacity-100"
+                    : "opacity-50 hover:opacity-100"
+                }`}
+              >
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* 言語切り替え - 右端 */}
+        <button
+          onClick={toggleLanguage}
+          className="text-small text-muted hover:text-primary transition-colors ml-auto leading-none"
         >
-          Takeshi Hashimoto
-        </Link>
-
-        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <LanguageSwitcher />
-
-          <nav>
-            <ul className="flex space-x-6">
-              {navItems.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    href={createLinkHref(item.path)}
-                    className={
-                      router.pathname.startsWith(item.path)
-                        ? "font-bold text-black"
-                        : "text-gray-600 hover:text-black"
-                    }
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </div>
+          {language === "ja" ? "EN" : "JP"}
+        </button>
+      </nav>
     </header>
   );
 };
