@@ -1,8 +1,6 @@
 import Head from "next/head";
 import { Analytics } from "@vercel/analytics/next";
 import Header from "./Header";
-import NoSSR from "../utils/NoSSR";
-import { useLanguage } from "../../contexts/LanguageContext";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,10 +8,6 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, title }: LayoutProps) => {
-  const { language } = useLanguage();
-
-  // Provide a fixed title so it's the same on server and client
-  // This prevents hydration mismatch with titles
   const defaultTitle = "Takeshi Hashimoto";
   const finalTitle = title || defaultTitle;
 
@@ -25,22 +19,17 @@ const Layout = ({ children, title }: LayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NoSSR>
-        <Header />
-      </NoSSR>
+      <Header />
 
       <main className="container mx-auto px-4 py-8">{children}</main>
 
-      <NoSSR>
-        <footer className="container mx-auto px-4 py-8 border-t border-gray-200 mt-12">
-          <p className="text-center text-gray-500">
-            © {new Date().getFullYear()} Takeshi Hashimoto
-          </p>
-        </footer>
-      </NoSSR>
-      <NoSSR>
-        <Analytics />
-      </NoSSR>
+      <footer className="container mx-auto px-4 py-8 border-t border-gray-200 mt-12">
+        <p className="text-center text-gray-500">
+          © {new Date().getFullYear()} Takeshi Hashimoto
+        </p>
+      </footer>
+
+      <Analytics />
     </>
   );
 };

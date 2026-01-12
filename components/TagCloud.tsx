@@ -1,13 +1,12 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface TagCloudProps {
   tags: { tag: string; count: number }[];
 }
 
 const TagCloud = ({ tags }: TagCloudProps) => {
-  const router = useRouter();
-  const currentLang = (router.query.lang as string) || "en";
+  const { language } = useLanguage();
 
   if (tags.length === 0) {
     return null;
@@ -21,7 +20,7 @@ const TagCloud = ({ tags }: TagCloudProps) => {
     return min + (count / maxCount) * (max - min) + "rem";
   };
 
-  const title = currentLang === "ja" ? "タグ" : "Tags";
+  const title = language === "ja" ? "タグ" : "Tags";
 
   return (
     <div className="bg-gray-50 p-4 rounded-lg mb-8">
@@ -32,7 +31,7 @@ const TagCloud = ({ tags }: TagCloudProps) => {
             key={tag}
             href={{
               pathname: `/memo/tag/${tag}`,
-              query: { lang: currentLang },
+              query: { lang: language },
             }}
             style={{ fontSize: getSize(count) }}
             className="hover:text-blue-700"

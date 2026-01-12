@@ -22,11 +22,17 @@ const Header = () => {
     },
   ];
 
+  // 現在のクエリパラメータを保持しつつリンクを生成
+  const createLinkHref = (pathname: string) => ({
+    pathname,
+    query: { lang: language },
+  });
+
   return (
     <header className="border-b border-gray-200 py-4">
       <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
         <Link
-          href={{ pathname: "/", query: { lang: language } }}
+          href={createLinkHref("/")}
           className="text-2xl font-bold mb-4 sm:mb-0"
         >
           Takeshi Hashimoto
@@ -40,10 +46,7 @@ const Header = () => {
               {navItems.map((item) => (
                 <li key={item.path}>
                   <Link
-                    href={{
-                      pathname: item.path,
-                      query: { lang: language },
-                    }}
+                    href={createLinkHref(item.path)}
                     className={
                       router.pathname.startsWith(item.path)
                         ? "font-bold text-black"

@@ -1,33 +1,22 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Post } from "../../types";
-import NoSSR from "../utils/NoSSR";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 interface ArticleCardProps {
   memo: Post;
 }
 
 const ArticleCard = ({ memo }: ArticleCardProps) => {
-  const router = useRouter();
-  const currentLang = (router.query.lang as string) || "en";
+  const { language } = useLanguage();
 
-  // Simple placeholder for server rendering, avoids hydration mismatches
-  const SimpleDateDisplay = () => (
-    <span className="text-sm text-gray-500">{memo.date}</span>
-  );
-
-  // Client-only rich date formatting
-  const FormattedDate = () => (
-    <time dateTime={memo.date} className="text-sm text-gray-500">
-      {new Date(memo.date).toLocaleDateString(
-        memo.language === "ja" ? "ja-JP" : "en-US",
-        {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }
-      )}
-    </time>
+  // Format date based on memo's language
+  const formattedDate = new Date(memo.date).toLocaleDateString(
+    memo.language === "ja" ? "ja-JP" : "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
   );
 
   return (
@@ -45,10 +34,9 @@ const ArticleCard = ({ memo }: ArticleCardProps) => {
       </h2>
 
       <div className="mb-2 flex items-center gap-2">
-        {/* Use NoSSR for date formatting to prevent hydration issues */}
-        <NoSSR fallback={<SimpleDateDisplay />}>
-          <FormattedDate />
-        </NoSSR>
+        <time dateTime={memo.date} className="text-sm text-gray-500">
+          {formattedDate}
+        </time>
 
         <span className="text-xs px-2 py-0.5 bg-gray-100 rounded-full">
           {memo.language === "ja" ? "JP" : "EN"}
@@ -64,7 +52,7 @@ const ArticleCard = ({ memo }: ArticleCardProps) => {
             key={tag}
             href={{
               pathname: `/memo/tag/${tag}`,
-              query: { lang: currentLang },
+              query: { lang: language },
             }}
             className="text-xs bg-gray-100 px-2 py-1 rounded hover:bg-gray-200 transition-colors duration-200"
           >

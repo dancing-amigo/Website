@@ -1,105 +1,70 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useContext, useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
 
+type Language = "en" | "ja";
+
 type LanguageContextType = {
-  language: string;
-  setLanguage: (lang: string) => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
 };
 
-const defaultContext: LanguageContextType = {
+const LanguageContext = createContext<LanguageContextType>({
   language: "en",
   setLanguage: () => {},
-};
-
-const LanguageContext = createContext<LanguageContextType>(defaultContext);
+});
 
 export const useLanguage = () => useContext(LanguageContext);
+
+// URLクエリから言語を取得するヘルパー
+export function getLanguageFromQuery(query: { lang?: string }): Language {
+  const lang = query.lang;
+  if (lang === "ja" || lang === "en") {
+    return lang;
+  }
+  return "en";
+}
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const router = useRouter();
-  const [language, setLanguageState] = useState<string>("en");
-  const [isClient, setIsClient] = useState(false);
 
-  // Set isClient flag once component is mounted
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // URLクエリから言語を取得（唯一の信頼できるソース）
+  const language = useMemo<Language>(() => {
+    return getLanguageFromQuery(router.query as { lang?: string });
+  }, [router.query]);
 
-  // Don't update language state on server or during hydration
-  useEffect(() => {
-    if (!isClient || !router.isReady) return;
+  // 言語を変更する関数
+  const setLanguage = useCallback(
+    (newLang: Language) => {
+      if (newLang === language) return;
 
-    const urlLang = router.query.lang as string;
-
-    if (urlLang && (urlLang === "en" || urlLang === "ja")) {
-      setLanguageState(urlLang);
-
-      // Only attempt localStorage in a try/catch on client
+      // localStorageに保存（次回訪問時のデフォルト用）
       if (typeof window !== "undefined") {
         try {
-          localStorage.setItem("preferredLanguage", urlLang);
+          localStorage.setItem("preferredLanguage", newLang);
         } catch (e) {
-          console.warn("Could not access localStorage", e);
+          // localStorage使用不可の場合は無視
         }
       }
-    } else {
-      // Try to get from localStorage, but only on client
-      if (typeof window !== "undefined") {
-        try {
-          const savedLang = localStorage.getItem("preferredLanguage");
-          if (savedLang && (savedLang === "en" || savedLang === "ja")) {
-            setLanguageState(savedLang);
 
-            // Add to URL if missing, but only when router is ready
-            if (!urlLang && router.isReady) {
-              router.replace(
-                {
-                  pathname: router.pathname,
-                  query: { ...router.query, lang: savedLang },
-                },
-                undefined,
-                { shallow: true }
-              );
-            }
-          }
-        } catch (e) {
-          console.warn("Could not access localStorage", e);
-        }
-      }
-    }
-  }, [router.isReady, router.query.lang, isClient]);
+      // URLを更新（shallow: falseでgetServerSidePropsを再実行し、記事データを再取得）
+      const newQuery = { ...router.query, lang: newLang };
+      router.push({
+        pathname: router.pathname,
+        query: newQuery,
+      });
+    },
+    [language, router]
+  );
 
-  // Safe language change function
-  const setLanguage = (lang: string) => {
-    if (!isClient || lang === language) return;
+  const value = useMemo(
+    () => ({ language, setLanguage }),
+    [language, setLanguage]
+  );
 
-    setLanguageState(lang);
-
-    // Safeguarded client-side operations
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem("preferredLanguage", lang);
-
-        // Hard navigation to update the URL and refresh the page
-        window.location.href = `${window.location.pathname}?lang=${lang}`;
-      } catch (e) {
-        console.error("Error during language change:", e);
-        // Fallback to router if window operations fail
-        if (router.isReady) {
-          router.push({
-            pathname: router.pathname,
-            query: { ...router.query, lang },
-          });
-        }
-      }
-    }
-  };
-
-  // Provide a stable value - language only changes client-side after hydration
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
