@@ -27,7 +27,9 @@ const Layout = ({ children, title }: LayoutProps) => {
         </main>
 
         <footer className="container-narrow py-12 border-t border-border">
-          <p className="text-muted text-small">© {new Date().getFullYear()}</p>
+          <p className="text-muted text-small">
+            © {new Date().getFullYear()} Takeshi Hashimoto
+          </p>
         </footer>
       </div>
 
