@@ -55,7 +55,7 @@ export default function Home() {
             public value in doing so.
           </p>
           <p>
-            “Notes” is simply a place for accumulation. I try to write down
+            “Memo” is simply a place for accumulation. I try to write down
             vague, unformed, and floating abstract concepts as they are, without
             forcing them into shape.
           </p>
