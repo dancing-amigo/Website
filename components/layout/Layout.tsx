@@ -27,9 +27,18 @@ const Layout = ({ children, title }: LayoutProps) => {
         </main>
 
         <footer className="container-narrow py-12 border-t border-border">
-          <p className="text-muted text-small">
-            © {new Date().getFullYear()} Takeshi Hashimoto
-          </p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-small text-muted">
+            <span>© {new Date().getFullYear()} Takeshi Hashimoto</span>
+            <span className="text-muted/40">·</span>
+            <a
+              href="https://x.com/dancing_amigo"
+              className="hover:text-primary transition-colors"
+              target="_blank"
+              rel="noreferrer"
+            >
+              X（@dancing_amigo）
+            </a>
+          </div>
         </footer>
       </div>
 
