@@ -17,10 +17,6 @@ export default function AspirationPage({
   const currentLang = language || contextLanguage;
 
   const title = currentLang === "ja" ? "抱負" : "Aspiration";
-  const description =
-    currentLang === "ja"
-      ? "これから実現したいこと"
-      : "Things I aim to achieve";
   const emptyMessage =
     currentLang === "ja" ? "まだ抱負はありません。" : "No aspirations yet.";
 
@@ -28,7 +24,6 @@ export default function AspirationPage({
     <div className="fade-in">
       <header className="mb-16">
         <h1 className="font-serif text-display mb-4">{title}</h1>
-        <p className="text-secondary">{description}</p>
       </header>
 
       <MemoList

@@ -16,16 +16,11 @@ export default function MemoPage({ memos, tags, language }: MemoPageProps) {
   const currentLang = language || contextLanguage;
 
   const title = currentLang === "ja" ? "メモ" : "Memo";
-  const description =
-    currentLang === "ja"
-      ? "思考の断片、学びの記録"
-      : "Fragments of thought, records of learning";
 
   return (
     <div className="fade-in">
       <header className="mb-16">
         <h1 className="font-serif text-display mb-4">{title}</h1>
-        <p className="text-secondary">{description}</p>
       </header>
 
       {/* タグ - シンプルなインラインリスト */}

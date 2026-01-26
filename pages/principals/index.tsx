@@ -14,10 +14,6 @@ export default function PrincipalsPage({
   language,
 }: PrincipalsPageProps) {
   const title = language === "ja" ? "原則" : "Principals";
-  const description =
-    language === "ja"
-      ? "行動原則"
-      : "Guiding principles for how I act";
   const emptyMessage =
     language === "ja" ? "まだ原則はありません。" : "No principals yet.";
 
@@ -25,7 +21,6 @@ export default function PrincipalsPage({
     <div className="fade-in">
       <header className="mb-16 text-left">
         <h1 className="font-serif text-display mb-4">{title}</h1>
-        <p className="text-secondary">{description}</p>
       </header>
 
       {principals.length === 0 ? (

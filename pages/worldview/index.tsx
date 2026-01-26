@@ -14,10 +14,6 @@ export default function WorldviewPage({
   language,
 }: WorldviewPageProps) {
   const title = language === "ja" ? "世界観" : "Worldview";
-  const description =
-    language === "ja"
-      ? "世界をどのように理解しているか"
-      : "How I understand the world";
   const emptyMessage =
     language === "ja" ? "まだ記事はありません。" : "No articles yet.";
 
@@ -25,7 +21,6 @@ export default function WorldviewPage({
     <div className="fade-in">
       <header className="mb-16 text-left">
         <h1 className="font-serif text-display mb-4">{title}</h1>
-        <p className="text-secondary">{description}</p>
       </header>
 
       {worldviews.length === 0 ? (
