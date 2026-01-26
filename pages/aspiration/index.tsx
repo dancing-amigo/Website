@@ -30,6 +30,7 @@ export default function AspirationPage({
         memos={aspirations}
         basePath="/aspiration"
         emptyMessage={emptyMessage}
+        showDate={false}
       />
     </div>
   );

@@ -31,13 +31,7 @@ export default function AspirationDetailPage({
       </nav>
 
       <header className="mb-12">
-        <time className="text-small text-muted">
-          {new Date(aspiration.date).toLocaleDateString(
-            currentLang === "ja" ? "ja-JP" : "en-US",
-            { year: "numeric", month: "long", day: "numeric" }
-          )}
-        </time>
-        <h1 className="font-serif text-display mt-4">{aspiration.title}</h1>
+        <h1 className="font-serif text-display">{aspiration.title}</h1>
       </header>
 
       <div className="markdown-content">
