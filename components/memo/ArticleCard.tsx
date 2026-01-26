@@ -3,9 +3,10 @@ import { Post } from "../../types";
 
 interface ArticleCardProps {
   memo: Post;
+  basePath?: string;
 }
 
-const ArticleCard = ({ memo }: ArticleCardProps) => {
+const ArticleCard = ({ memo, basePath = "/memo" }: ArticleCardProps) => {
   const formattedDate = new Date(memo.date).toLocaleDateString(
     memo.language === "ja" ? "ja-JP" : "en-US",
     {
@@ -19,7 +20,7 @@ const ArticleCard = ({ memo }: ArticleCardProps) => {
     <article className="group py-6 border-b border-border last:border-0">
       <Link
         href={{
-          pathname: `/memo/${memo.slug}`,
+          pathname: `${basePath}/${memo.slug}`,
           query: { lang: memo.language },
         }}
         className="block"

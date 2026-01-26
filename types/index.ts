@@ -20,6 +20,12 @@ export interface Worldview {
   content: string;
 }
 
+export interface Principal {
+  slug: string;
+  title: string;
+  content: string;
+}
+
 // 統合検索結果
 export interface UnifiedSearchResult {
   type: "memo" | "worldview" | "work";

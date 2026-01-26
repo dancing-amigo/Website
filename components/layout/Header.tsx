@@ -20,8 +20,12 @@ const Header = () => {
       path: "/worldview",
     },
     {
-      name: language === "ja" ? "作品" : "Work",
-      path: "/work",
+      name: language === "ja" ? "原則" : "Principals",
+      path: "/principals",
+    },
+    {
+      name: language === "ja" ? "抱負" : "Aspiration",
+      path: "/aspiration",
     },
   ];
 

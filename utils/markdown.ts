@@ -1,7 +1,13 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { Post, SearchResult, Worldview, UnifiedSearchResult } from "../types";
+import {
+  Post,
+  SearchResult,
+  Worldview,
+  Principal,
+  UnifiedSearchResult,
+} from "../types";
 
 const contentDirectory = path.join(process.cwd(), "content");
 
@@ -51,6 +57,55 @@ export function getAllMemos(language?: string): Post[] {
   );
 }
 
+export function getAspirationBySlug(
+  slug: string,
+  language: string = "en"
+): Post {
+  const aspirationDirectory = path.join(contentDirectory, "aspiration", language);
+  const fullPath = path.join(aspirationDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(fileContents);
+
+  return {
+    slug,
+    content,
+    title: data.title,
+    date: data.date,
+    tags: data.tags || [],
+    excerpt: data.excerpt || "",
+    language: language,
+    translationKey: data.translationKey || "",
+  };
+}
+
+export function getAllAspirations(language?: string): Post[] {
+  // 言語が指定されている場合はその言語のみ、指定がない場合は全言語
+  const languages = language ? [language] : ["en", "ja"];
+  let allAspirations: Post[] = [];
+
+  for (const lang of languages) {
+    const aspirationDirectory = path.join(contentDirectory, "aspiration", lang);
+
+    // ディレクトリが存在しない場合はスキップ
+    if (!fs.existsSync(aspirationDirectory)) {
+      continue;
+    }
+
+    const slugs = fs
+      .readdirSync(aspirationDirectory)
+      .filter((file) => file.endsWith(".md"))
+      .map((file) => file.replace(/\.md$/, ""));
+
+    const aspirations = slugs.map((slug) => getAspirationBySlug(slug, lang));
+    allAspirations = [...allAspirations, ...aspirations];
+  }
+
+  // 日付でソート
+  return allAspirations.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
+
 export function getAllWorldviews(language: string = "ja"): Worldview[] {
   const worldviewDirectory = path.join(contentDirectory, "worldview", language);
 
@@ -77,6 +132,46 @@ export function getWorldviewBySlug(
 ): Worldview {
   const worldviewDirectory = path.join(contentDirectory, "worldview", language);
   const fullPath = path.join(worldviewDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { content } = matter(fileContents);
+
+  const lines = content.split("\n");
+  const title = lines[0].replace("# ", "");
+  const contentWithoutTitle = lines.slice(1).join("\n");
+
+  return {
+    slug,
+    content: contentWithoutTitle,
+    title,
+  };
+}
+
+export function getAllPrincipals(language: string = "ja"): Principal[] {
+  const principalDirectory = path.join(contentDirectory, "principals", language);
+
+  // ディレクトリが存在しない場合は空配列を返す
+  if (!fs.existsSync(principalDirectory)) {
+    return [];
+  }
+
+  const slugs = fs
+    .readdirSync(principalDirectory)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => file.replace(/\.md$/, ""));
+
+  const principals = slugs
+    .map((slug) => getPrincipalBySlug(slug, language))
+    .sort((a, b) => parseInt(a.slug) - parseInt(b.slug));
+
+  return principals;
+}
+
+export function getPrincipalBySlug(
+  slug: string,
+  language: string = "ja"
+): Principal {
+  const principalDirectory = path.join(contentDirectory, "principals", language);
+  const fullPath = path.join(principalDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content } = matter(fileContents);
 
