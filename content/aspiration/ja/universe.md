@@ -1,6 +1,7 @@
 ---
 title: "宇宙について詳しくなる"
-date: "2026-01-26"
+createdAt: "2026-01-26"
+updatedAt: "2026-01-26"
 translationKey: "universe"
 ---
 

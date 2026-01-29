@@ -1,6 +1,7 @@
 ---
 title: "継承する"
-date: "2026-01-26"
+createdAt: "2026-01-27"
+updatedAt: "2026-01-27"
 translationKey: "inheritance"
 ---
 

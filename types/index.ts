@@ -2,6 +2,8 @@ export interface Post {
   slug: string;
   title: string;
   date: string;
+  createdAt?: string; // aspiration用の作成日
+  updatedAt?: string; // aspiration用の更新日
   content: string;
   tags: string[];
   excerpt: string;

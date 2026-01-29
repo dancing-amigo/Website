@@ -32,6 +32,21 @@ export default function AspirationDetailPage({
 
       <header className="mb-12">
         <h1 className="font-serif text-display">{aspiration.title}</h1>
+        <div className="mt-4 text-small text-muted">
+          {aspiration.createdAt && (
+            <span>
+              {currentLang === "ja" ? "作成日: " : "Created: "}
+              {aspiration.createdAt}
+            </span>
+          )}
+          {aspiration.updatedAt &&
+            aspiration.updatedAt !== aspiration.createdAt && (
+              <span className="ml-4">
+                {currentLang === "ja" ? "更新日: " : "Updated: "}
+                {aspiration.updatedAt}
+              </span>
+            )}
+        </div>
       </header>
 
       <div className="markdown-content">
@@ -42,7 +57,6 @@ export default function AspirationDetailPage({
           {aspiration.content}
         </ReactMarkdown>
       </div>
-
     </article>
   );
 }

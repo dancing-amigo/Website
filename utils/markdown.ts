@@ -53,15 +53,19 @@ export function getAllMemos(language?: string): Post[] {
 
   // 日付でソート
   return allMemos.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }
 
 export function getAspirationBySlug(
   slug: string,
-  language: string = "en"
+  language: string = "en",
 ): Post {
-  const aspirationDirectory = path.join(contentDirectory, "aspiration", language);
+  const aspirationDirectory = path.join(
+    contentDirectory,
+    "aspiration",
+    language,
+  );
   const fullPath = path.join(aspirationDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
@@ -70,7 +74,9 @@ export function getAspirationBySlug(
     slug,
     content,
     title: data.title,
-    date: data.date,
+    date: data.createdAt || data.date, // 後方互換性のためdateも使用
+    createdAt: data.createdAt || data.date,
+    updatedAt: data.updatedAt || data.createdAt || data.date,
     tags: data.tags || [],
     excerpt: data.excerpt || "",
     language: language,
@@ -100,9 +106,11 @@ export function getAllAspirations(language?: string): Post[] {
     allAspirations = [...allAspirations, ...aspirations];
   }
 
-  // 日付でソート
+  // createdAt（作成日）でソート
   return allAspirations.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) =>
+      new Date(b.createdAt || b.date).getTime() -
+      new Date(a.createdAt || a.date).getTime(),
   );
 }
 
@@ -128,7 +136,7 @@ export function getAllWorldviews(language: string = "ja"): Worldview[] {
 
 export function getWorldviewBySlug(
   slug: string,
-  language: string = "ja"
+  language: string = "ja",
 ): Worldview {
   const worldviewDirectory = path.join(contentDirectory, "worldview", language);
   const fullPath = path.join(worldviewDirectory, `${slug}.md`);
@@ -147,7 +155,11 @@ export function getWorldviewBySlug(
 }
 
 export function getAllPrincipals(language: string = "ja"): Principal[] {
-  const principalDirectory = path.join(contentDirectory, "principals", language);
+  const principalDirectory = path.join(
+    contentDirectory,
+    "principals",
+    language,
+  );
 
   // ディレクトリが存在しない場合は空配列を返す
   if (!fs.existsSync(principalDirectory)) {
@@ -168,9 +180,13 @@ export function getAllPrincipals(language: string = "ja"): Principal[] {
 
 export function getPrincipalBySlug(
   slug: string,
-  language: string = "ja"
+  language: string = "ja",
 ): Principal {
-  const principalDirectory = path.join(contentDirectory, "principals", language);
+  const principalDirectory = path.join(
+    contentDirectory,
+    "principals",
+    language,
+  );
   const fullPath = path.join(principalDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content } = matter(fileContents);
@@ -189,7 +205,7 @@ export function getPrincipalBySlug(
 // 翻訳リンクを取得する関数
 export function getTranslation(
   post: Post,
-  targetLanguage: string
+  targetLanguage: string,
 ): Post | null {
   if (!post.translationKey) return null;
 
@@ -198,7 +214,7 @@ export function getTranslation(
     const otherLanguageMemos = getAllMemos(targetLanguage);
     return (
       otherLanguageMemos.find(
-        (memo) => memo.translationKey === post.translationKey
+        (memo) => memo.translationKey === post.translationKey,
       ) || null
     );
   } catch (error) {
@@ -209,7 +225,7 @@ export function getTranslation(
 
 export function searchMemosByKeyword(
   keyword: string,
-  language?: string
+  language?: string,
 ): SearchResult[] {
   if (!keyword || keyword.trim() === "") {
     return [];
@@ -226,7 +242,7 @@ export function searchMemosByKeyword(
       const inContent = memo.content.toLowerCase().includes(lowercasedKeyword);
       const inExcerpt = memo.excerpt.toLowerCase().includes(lowercasedKeyword);
       const inTags = memo.tags.some((tag) =>
-        tag.toLowerCase().includes(lowercasedKeyword)
+        tag.toLowerCase().includes(lowercasedKeyword),
       );
 
       // いずれかに完全一致する場合のみtrue
@@ -264,7 +280,7 @@ export function searchMemosByKeyword(
         const snippetStart = Math.max(0, keywordIndex - 100);
         const snippetEnd = Math.min(
           memo.content.length,
-          keywordIndex + lowercasedKeyword.length + 100
+          keywordIndex + lowercasedKeyword.length + 100,
         );
 
         snippet = memo.content.substring(snippetStart, snippetEnd).trim();
@@ -320,7 +336,7 @@ export function getMemosByTag(tag: string, language?: string): Post[] {
 }
 
 export function getAllTags(
-  language?: string
+  language?: string,
 ): { tag: string; count: number }[] {
   const allMemos = language ? getAllMemos(language) : getAllMemos();
   const tagCount: Record<string, number> = {};
@@ -375,7 +391,7 @@ const worksData = [
 // 統合検索関数
 export function searchAll(
   keyword: string,
-  language: string = "en"
+  language: string = "en",
 ): UnifiedSearchResult[] {
   if (!keyword || keyword.trim() === "") {
     return [];
@@ -391,7 +407,7 @@ export function searchAll(
     const inContent = memo.content.toLowerCase().includes(lowercasedKeyword);
     const inExcerpt = memo.excerpt.toLowerCase().includes(lowercasedKeyword);
     const inTags = memo.tags.some((tag) =>
-      tag.toLowerCase().includes(lowercasedKeyword)
+      tag.toLowerCase().includes(lowercasedKeyword),
     );
 
     if (inTitle || inContent || inExcerpt || inTags) {
@@ -402,7 +418,7 @@ export function searchAll(
         const snippetStart = Math.max(0, keywordIndex - 50);
         const snippetEnd = Math.min(
           memo.content.length,
-          keywordIndex + lowercasedKeyword.length + 50
+          keywordIndex + lowercasedKeyword.length + 50,
         );
         snippet = memo.content.substring(snippetStart, snippetEnd).trim();
         if (snippetStart > 0) snippet = "..." + snippet;
@@ -435,7 +451,7 @@ export function searchAll(
         const snippetStart = Math.max(0, keywordIndex - 50);
         const snippetEnd = Math.min(
           worldview.content.length,
-          keywordIndex + lowercasedKeyword.length + 50
+          keywordIndex + lowercasedKeyword.length + 50,
         );
         snippet = worldview.content.substring(snippetStart, snippetEnd).trim();
         if (snippetStart > 0) snippet = "..." + snippet;
