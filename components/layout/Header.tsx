@@ -4,7 +4,7 @@ import { SectionKey } from "../../types";
 import { getSectionMeta } from "../../utils/sections";
 
 const sections: SectionKey[] = [
-  "self-definition",
+  "principals",
   "viewprint",
   "artifacts",
 ];

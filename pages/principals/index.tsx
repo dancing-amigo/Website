@@ -10,7 +10,7 @@ interface SectionPageProps {
 export default function SelfDefinitionPage({ entries }: SectionPageProps) {
   return (
     <div className="fade-in">
-      <EntryList entries={entries} section="self-definition" />
+      <EntryList entries={entries} section="principals" />
     </div>
   );
 }
@@ -18,7 +18,7 @@ export default function SelfDefinitionPage({ entries }: SectionPageProps) {
 export const getStaticProps: GetStaticProps<SectionPageProps> = async () => {
   return {
     props: {
-      entries: getAllEntries("self-definition"),
+      entries: getAllEntries("principals"),
     },
   };
 };

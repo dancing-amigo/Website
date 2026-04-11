@@ -6,7 +6,7 @@ export default function Home() {
           <p>こんにちは、橋本武士です。<br />このウェブサイトは、私の脳のスナップショットです。</p>
 
           <p>
-            ここには、私が何者であるかを示す「Self Definition」、私が世界をどう見たかの履歴である「Viewprint」、
+            ここには、私が何者であるかを示す「Principals」、私が世界をどう見たかの履歴である「Viewprint」、
             そして私がこの世界に残したものを収める「Artifacts」を記録しています。
           </p>
 

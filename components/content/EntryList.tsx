@@ -21,7 +21,7 @@ const EntryList = ({ entries, section }: EntryListProps) => {
             {entry.excerpt ? (
               <p className="max-w-2xl text-base leading-7 text-secondary">{entry.excerpt}</p>
             ) : null}
-            {section === "self-definition" && entry.tags.length > 0 ? (
+            {section === "principals" && entry.tags.length > 0 ? (
               <div className="flex flex-wrap gap-2 pt-1">
                 {entry.tags.map((tag) => (
                   <span

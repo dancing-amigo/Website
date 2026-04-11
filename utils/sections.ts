@@ -10,11 +10,11 @@ export const sectionConfig: Record<
     allowEmbeds: boolean;
   }
 > = {
-  "self-definition": {
-    title: "Self definition",
+  principals: {
+    title: "Principals",
     description:
       "自分が自分であるための条件と、大事にしている哲学を章立てで置く場所。",
-    directory: "self-definition",
+    directory: "principals",
     sort: "order",
     allowEmbeds: false,
   },
