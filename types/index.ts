@@ -1,38 +1,23 @@
-export interface Post {
+export type SectionKey = "self-definition" | "viewprint" | "artifacts";
+
+export interface ContentEntry {
   slug: string;
   title: string;
-  date: string;
-  createdAt?: string; // aspiration用の作成日
-  updatedAt?: string; // aspiration用の更新日
   content: string;
+  section: SectionKey;
+  excerpt: string | null;
+  date: string | null;
+  order: number | null;
   tags: string[];
-  excerpt: string;
-  language: string; // 'ja' または 'en'
-  translationKey?: string; // 同じ記事の異なる言語版を関連付ける
 }
 
-export interface SearchResult extends Post {
-  matchLocations: string[];
-  snippet: string;
-}
+export type EmbedType = "youtube" | "spotify" | "audio";
 
-export interface Worldview {
-  slug: string;
-  title: string;
-  content: string;
-}
-
-export interface Principal {
-  slug: string;
-  title: string;
-  content: string;
-}
-
-// 統合検索結果
-export interface UnifiedSearchResult {
-  type: "memo" | "worldview" | "work";
-  title: string;
-  description: string;
+export interface EmbedBlock {
+  type: EmbedType;
   url: string;
-  snippet?: string;
 }
+
+export type RichContentBlock =
+  | { type: "markdown"; content: string }
+  | { type: "embed"; embed: EmbedBlock };
