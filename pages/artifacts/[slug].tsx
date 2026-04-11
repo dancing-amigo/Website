@@ -11,15 +11,9 @@ interface EntryPageProps {
 export default function ArtifactsEntryPage({ entry }: EntryPageProps) {
   return (
     <article className="fade-in">
-      <div className="mb-10 space-y-5 pb-2">
-        <Link
-          href="/artifacts"
-          className="text-xs uppercase tracking-[0.2em] text-muted hover:text-primary"
-        >
-          Back to Artifacts
-        </Link>
+      <div className="mb-5 space-y-3 pb-1">
         <p className="text-xs uppercase tracking-[0.2em] text-muted">{entry.date}</p>
-        <h1 className="max-w-4xl font-display text-5xl leading-[0.95] tracking-[-0.05em] md:text-7xl">
+        <h1 className="max-w-4xl font-display text-3xl leading-[0.95] tracking-[-0.05em] md:text-5xl">
           {entry.title}
         </h1>
         {entry.excerpt ? (
