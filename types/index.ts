@@ -1,4 +1,4 @@
-export type SectionKey = "principals" | "viewprint" | "artifacts";
+export type SectionKey = "principals" | "notes" | "viewprint" | "artifacts";
 
 export interface ContentEntry {
   slug: string;

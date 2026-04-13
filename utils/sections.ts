@@ -18,6 +18,13 @@ export const sectionConfig: Record<
     sort: "order",
     allowEmbeds: false,
   },
+  notes: {
+    title: "Notes",
+    description: "より短い断片や途中段階の思考を、高い頻度で記録していく場所。",
+    directory: "notes",
+    sort: "date",
+    allowEmbeds: true,
+  },
   viewprint: {
     title: "Viewprint",
     description:

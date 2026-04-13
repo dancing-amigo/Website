@@ -5,6 +5,7 @@ import { getSectionMeta } from "../../utils/sections";
 
 const sections: SectionKey[] = [
   "principals",
+  "notes",
   "viewprint",
   "artifacts",
 ];

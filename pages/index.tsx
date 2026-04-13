@@ -6,8 +6,8 @@ export default function Home() {
           <p>こんにちは、橋本武士です。<br />このウェブサイトは、私の脳のスナップショットです。</p>
 
           <p>
-            ここには、私の行動原理を示す「Principals」、私が世界をどう見たかの履歴「Viewprint」、
-            そして私がこの世界に残したものを収める「Artifacts」を記録しています。
+            ここには、私の行動原理を示す「Principals」、より頻繁に思考を記録する「Notes」、
+            私が世界をどう見たかの履歴「Viewprint」、そして私がこの世界に残したものを収める「Artifacts」を記録しています。
           </p>
 
           <p>
