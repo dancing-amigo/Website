@@ -57,6 +57,10 @@ export function getAllEntries(): ContentEntry[] {
   });
 }
 
+export function getEntriesByDirectory(directory: string): ContentEntry[] {
+  return getAllEntries().filter((entry) => entry.slug.startsWith(`${directory}/`));
+}
+
 export function getEntryBySlug(slug: string) {
   const filePath = path.join(contentRoot, `${slug}.md`);
   if (!fs.existsSync(filePath)) {

@@ -115,6 +115,15 @@
   .embed-frame-audio iframe {
     @apply h-full w-full border-0;
   }
+
+  .hero-toc-layer {
+    @apply pointer-events-none absolute inset-x-0 top-1/2 z-10 h-[18rem] -translate-y-1/2 overflow-visible;
+  }
+
+  .hero-toc-card {
+    @apply pointer-events-auto absolute left-1/2 top-1/2 block w-[min(94vw,72rem)] -translate-y-1/2 text-white outline-none;
+    animation: heroTocSlide 7.6s cubic-bezier(0.32, 0, 0.18, 1) both;
+  }
 }
 
 @layer utilities {
@@ -130,6 +139,37 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes heroTocSlide {
+    0% {
+      opacity: 0;
+      transform: translate(72vw, -50%);
+    }
+    14% {
+      opacity: 1;
+    }
+    25%,
+    57% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+    84% {
+      opacity: 1;
+      transform: translate(calc(-72vw - 100%), -50%);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(calc(-72vw - 100%), -50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-toc-card {
+      animation: none;
+      opacity: 1;
+      transform: translate(-50%, -50%);
     }
   }
 }
