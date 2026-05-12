@@ -1,10 +1,7 @@
-export type SectionKey = "principals" | "notes" | "viewprint" | "artifacts";
-
 export interface ContentEntry {
   slug: string;
   title: string;
   content: string;
-  section: SectionKey;
   excerpt: string | null;
   date: string | null;
   order: number | null;

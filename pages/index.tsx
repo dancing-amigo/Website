@@ -1,30 +1,11 @@
 export default function Home() {
   return (
     <div className="fade-in">
-      <section className="max-w-prose pt-4">
-        <div className="markdown-content">
-          <p>こんにちは、橋本武士です。<br />このウェブサイトは、私の脳のスナップショットです。</p>
-
-          <p>
-            ここには、私の行動原理を示す「Principals」、より頻繁に思考を記録する「Notes」、
-            私が世界をどう見たかの履歴「Viewprint」、そして私がこの世界に残したものを収める「Artifacts」を記録しています。
-          </p>
-
-          <p>
-            これらを記録し、公開する目的は二つあります。
-            一つは、私自身の記憶を管理するためです。書き留めておくことで、過去の自分へ立ち返ることができると考えています。
-          </p>
-
-          <p>
-            もう一つは、自己紹介としての役割です。私が何を考え、何を大切にしているのかが伝われば、
-            私たちのコミュニケーションはきっとより滑らかになると思っています。
-          </p>
-
-          <p>
-            このブログの断片が、少しでもあなたの心を動かしたなら、ぜひ直接ご連絡ください。
-            お話しできるのを楽しみにしています。
-          </p>
-        </div>
+      <section
+        className="relative flex min-h-screen items-end overflow-hidden bg-black bg-cover bg-center"
+        style={{ minHeight: "100dvh", backgroundImage: "url('/hero-space.png')" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/5 to-black/55" />
       </section>
     </div>
   );
