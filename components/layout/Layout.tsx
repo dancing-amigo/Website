@@ -48,7 +48,7 @@ const Layout = ({ children, title, description }: LayoutProps) => {
           <div
             className={
               isHome
-                ? "site-shell relative flex items-center justify-between"
+                ? "home-header-shell relative flex items-center justify-between"
                 : "relative flex items-center justify-between"
             }
           >
