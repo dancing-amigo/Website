@@ -42,15 +42,11 @@ const Layout = ({ children, title, description }: LayoutProps) => {
           className={
             isHome
               ? "absolute inset-x-0 top-0 z-20 py-10 text-white/90"
-              : "site-shell py-10"
+              : "py-10"
           }
         >
           <div
-            className={
-              isHome
-                ? "home-header-shell relative flex items-center justify-between"
-                : "relative flex items-center justify-between"
-            }
+            className="home-header-shell relative flex items-center justify-between"
           >
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a
